@@ -58,8 +58,8 @@ export function MapPage() {
           <picture className="archipelago-scene">
             {/* Phones always get the small file, whatever their pixel density. */}
             <source media="(max-width: 899px)" srcSet="/assets/map/island-800.webp" />
-            <img src="/assets/map/island-1536.webp" srcSet="/assets/map/island-800.webp 800w, /assets/map/island-1536.webp 1536w"
-              sizes="(min-width: 1280px) 892px, 70vw" width="1536" height="1024" alt="" loading={sceneLoading} decoding="async" />
+            <img src="/assets/map/island-1536.webp" srcSet="/assets/map/island-800.webp 800w, /assets/map/island-1536.webp 1536w, /assets/map/island-2400.webp 2400w"
+              sizes="(min-width: 1800px) 1200px, (min-width: 1200px) 66vw, 60vw" width="1536" height="1024" alt="" loading={sceneLoading} decoding="async" />
           </picture>
           {/* Duplicates the list for pointer users only, so it stays out of the tab order and the accessibility tree. */}
           <div className="archipelago-islands" aria-hidden="true">

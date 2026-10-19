@@ -1230,9 +1230,16 @@
 
   /* ── Mission shell ───────────────────────────────────────── */
 
+  /* The site measure (1184px inside 48px gutters, 24px on phones), like .site-header, so the bar's rule,
+     the back link and the board line up with every other page. */
   .mission-shell {
-    max-width: 1320px;
+    flex: 1 0 auto;
+    width: min(1184px, 100% - 96px);
     margin: 0 auto;
+
+    @media (max-width: 760px) {
+      width: calc(100% - 48px);
+    }
   }
 
   .mission-bar {
@@ -1240,7 +1247,7 @@
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: 16px;
-    padding: 14px 32px;
+    padding: 14px 0;
     border-bottom: 1px solid var(--color-line);
 
     & .back-button {
@@ -1255,7 +1262,7 @@
 
     @media (max-width: 760px) {
       grid-template-columns: 1fr auto;
-      padding: 10px 16px;
+      padding: 10px 0;
       row-gap: 6px;
 
       & .stage-indicator {
@@ -1337,10 +1344,10 @@
   }
 
   .mission-main {
-    padding: 32px 32px 48px;
+    padding: 32px 0 48px;
 
     @media (max-width: 760px) {
-      padding: 20px 16px 36px;
+      padding: 20px 0 36px;
     }
   }
 
