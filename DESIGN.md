@@ -113,7 +113,7 @@ components:
 
 The existing island identity pairs warm cream surfaces and navy Greek text with teal controls, yellow accents and original illustrated artwork. Preserve the name, bundled Noto Sans, the original island and Σπίθα artwork, and the cream/teal/navy/coral/yellow palette established in PRODUCT.md.
 
-This is a scan of the implemented profile design preview in src/App.jsx and src/index.css, not a specification for completed missions or production profile persistence. The welcome-and-choice composition belongs to this surface; future screens inherit the identity, not its grid.
+This is a scan of the implemented profile design preview in src/App.tsx and src/index.css, not a specification for completed missions or production profile persistence. The welcome-and-choice composition belongs to this surface; future screens inherit the identity, not its grid.
 
 **Key Characteristics:**
 - Warm, light surfaces with readable Greek typography.
@@ -155,7 +155,7 @@ In this profile preview, the welcome heading becomes 36px below 1100px and 29px 
 
 ## Layout
 
-Shared visual traits are generous whitespace, clear grouping, restrained separators and controls that work with touch and keyboard. Exact composition below describes the **current profile surface only**, as governed by `.impeccable/surfaces/src-app-jsx.md`.
+Shared visual traits are generous whitespace, clear grouping, restrained separators and controls that work with touch and keyboard. Exact composition below describes the **current profile surface only**, as governed by `.impeccable/surfaces/src-app-tsx.md`.
 
 The header is capped at 1280px. The profile region is capped at 1184px with 32px horizontal padding, a 390px welcome column, a flexible choice column and a 72px gap. At 1100px the welcome column becomes 310px and the gap 36px. Below 760px the surface stacks with 24px horizontal padding; welcome copy and a smaller Σπίθα share a row above the choices.
 

@@ -1,7 +1,7 @@
 ---
 version: 1
-slug: "src-app-jsx"
-primary_target: "src/App.jsx"
+slug: "src-app-tsx"
+primary_target: "src/App.tsx"
 related_targets: ["src/index.css"]
 ---
 

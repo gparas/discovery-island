@@ -326,7 +326,7 @@
   ],
   "narrative": {
     "northStar": "Το Νησί των Ανακαλύψεων",
-    "overview": "The existing island identity pairs warm cream surfaces and navy Greek text with teal controls, yellow accents and original illustrated artwork. Preserve the name, bundled Noto Sans, the original island and Σπίθα artwork, and the cream/teal/navy/coral/yellow palette established in PRODUCT.md.\n\nThis is a scan of the implemented profile design preview in src/App.jsx and src/index.css, not a specification for completed missions or production profile persistence. The welcome-and-choice composition belongs to this surface; future screens inherit the identity, not its grid.",
+    "overview": "The existing island identity pairs warm cream surfaces and navy Greek text with teal controls, yellow accents and original illustrated artwork. Preserve the name, bundled Noto Sans, the original island and Σπίθα artwork, and the cream/teal/navy/coral/yellow palette established in PRODUCT.md.\n\nThis is a scan of the implemented profile design preview in src/App.tsx and src/index.css, not a specification for completed missions or production profile persistence. The welcome-and-choice composition belongs to this surface; future screens inherit the identity, not its grid.",
     "keyCharacteristics": [
       "Warm, light surfaces with readable Greek typography.",
       "Original Σπίθα and illustrated island objects give the interface its character.",
