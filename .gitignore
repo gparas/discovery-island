@@ -43,6 +43,17 @@ test-results/
 .impeccable/logs/
 .impeccable/tmp/
 
+# Generated design comparisons, screenshots, and decision-page sessions
+# Approved decisions are recorded in docs/ and .impeccable/surfaces/.
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/questions/
+.impeccable/profile-options.json
+
+# Live-mode runtime files; retain its portable project configuration
+.impeccable/live/*
+!.impeccable/live/config.json
+
 # Locally installed agent skills (reinstall with the skill installer)
 .agents/skills/
 .codex/skills/

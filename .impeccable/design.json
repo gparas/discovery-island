@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-19T11:00:11.002529+00:00",
+  "title": "Design System: Το Νησί των Ανακαλύψεων",
+  "extensions": {
+    "colorMeta": {
+      "cream": {
+        "role": "neutral",
+        "displayName": "Cream",
+        "tonalRamp": [
+          "oklch(15.00% 0.01586 82.79)",
+          "oklch(26.43% 0.01586 82.79)",
+          "oklch(37.86% 0.01586 82.79)",
+          "oklch(49.29% 0.01586 82.79)",
+          "oklch(60.71% 0.01586 82.79)",
+          "oklch(72.14% 0.01586 82.79)",
+          "oklch(83.57% 0.01586 82.79)",
+          "oklch(95.00% 0.01586 82.79)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15.00% 0.00693 88.64)",
+          "oklch(26.43% 0.00693 88.64)",
+          "oklch(37.86% 0.00693 88.64)",
+          "oklch(49.29% 0.00693 88.64)",
+          "oklch(60.71% 0.00693 88.64)",
+          "oklch(72.14% 0.00693 88.64)",
+          "oklch(83.57% 0.00693 88.64)",
+          "oklch(95.00% 0.00693 88.64)"
+        ]
+      },
+      "navy": {
+        "role": "neutral",
+        "displayName": "Navy",
+        "tonalRamp": [
+          "oklch(15.00% 0.06252 251.22)",
+          "oklch(26.43% 0.06252 251.22)",
+          "oklch(37.86% 0.06252 251.22)",
+          "oklch(49.29% 0.06252 251.22)",
+          "oklch(60.71% 0.06252 251.22)",
+          "oklch(72.14% 0.06252 251.22)",
+          "oklch(83.57% 0.06252 251.22)",
+          "oklch(95.00% 0.06252 251.22)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "tonalRamp": [
+          "oklch(15.00% 0.03519 242.57)",
+          "oklch(26.43% 0.03519 242.57)",
+          "oklch(37.86% 0.03519 242.57)",
+          "oklch(49.29% 0.03519 242.57)",
+          "oklch(60.71% 0.03519 242.57)",
+          "oklch(72.14% 0.03519 242.57)",
+          "oklch(83.57% 0.03519 242.57)",
+          "oklch(95.00% 0.03519 242.57)"
+        ]
+      },
+      "teal": {
+        "role": "primary",
+        "displayName": "Teal",
+        "tonalRamp": [
+          "oklch(15.00% 0.09224 207.55)",
+          "oklch(26.43% 0.09224 207.55)",
+          "oklch(37.86% 0.09224 207.55)",
+          "oklch(49.29% 0.09224 207.55)",
+          "oklch(60.71% 0.09224 207.55)",
+          "oklch(72.14% 0.09224 207.55)",
+          "oklch(83.57% 0.09224 207.55)",
+          "oklch(95.00% 0.09224 207.55)"
+        ]
+      },
+      "teal-dark": {
+        "role": "primary",
+        "displayName": "Teal Dark",
+        "tonalRamp": [
+          "oklch(15.00% 0.07846 208.02)",
+          "oklch(26.43% 0.07846 208.02)",
+          "oklch(37.86% 0.07846 208.02)",
+          "oklch(49.29% 0.07846 208.02)",
+          "oklch(60.71% 0.07846 208.02)",
+          "oklch(72.14% 0.07846 208.02)",
+          "oklch(83.57% 0.07846 208.02)",
+          "oklch(95.00% 0.07846 208.02)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "tonalRamp": [
+          "oklch(15.00% 0.01325 130.79)",
+          "oklch(26.43% 0.01325 130.79)",
+          "oklch(37.86% 0.01325 130.79)",
+          "oklch(49.29% 0.01325 130.79)",
+          "oklch(60.71% 0.01325 130.79)",
+          "oklch(72.14% 0.01325 130.79)",
+          "oklch(83.57% 0.01325 130.79)",
+          "oklch(95.00% 0.01325 130.79)"
+        ]
+      },
+      "seafoam": {
+        "role": "tertiary",
+        "displayName": "Seafoam",
+        "tonalRamp": [
+          "oklch(15.00% 0.01669 178.27)",
+          "oklch(26.43% 0.01669 178.27)",
+          "oklch(37.86% 0.01669 178.27)",
+          "oklch(49.29% 0.01669 178.27)",
+          "oklch(60.71% 0.01669 178.27)",
+          "oklch(72.14% 0.01669 178.27)",
+          "oklch(83.57% 0.01669 178.27)",
+          "oklch(95.00% 0.01669 178.27)"
+        ]
+      },
+      "coral": {
+        "role": "secondary",
+        "displayName": "Coral",
+        "tonalRamp": [
+          "oklch(15.00% 0.16396 28.73)",
+          "oklch(26.43% 0.16396 28.73)",
+          "oklch(37.86% 0.16396 28.73)",
+          "oklch(49.29% 0.16396 28.73)",
+          "oklch(60.71% 0.16396 28.73)",
+          "oklch(72.14% 0.16396 28.73)",
+          "oklch(83.57% 0.16396 28.73)",
+          "oklch(95.00% 0.16396 28.73)"
+        ]
+      },
+      "yellow": {
+        "role": "secondary",
+        "displayName": "Yellow",
+        "tonalRamp": [
+          "oklch(15.00% 0.13478 86.06)",
+          "oklch(26.43% 0.13478 86.06)",
+          "oklch(37.86% 0.13478 86.06)",
+          "oklch(49.29% 0.13478 86.06)",
+          "oklch(60.71% 0.13478 86.06)",
+          "oklch(72.14% 0.13478 86.06)",
+          "oklch(83.57% 0.13478 86.06)",
+          "oklch(95.00% 0.13478 86.06)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 89.88)",
+          "oklch(26.43% 0.00000 89.88)",
+          "oklch(37.86% 0.00000 89.88)",
+          "oklch(49.29% 0.00000 89.88)",
+          "oklch(60.71% 0.00000 89.88)",
+          "oklch(72.14% 0.00000 89.88)",
+          "oklch(83.57% 0.00000 89.88)",
+          "oklch(95.00% 0.00000 89.88)"
+        ]
+      },
+      "teal-pressed": {
+        "role": "primary",
+        "displayName": "Teal Pressed",
+        "tonalRamp": [
+          "oklch(15.00% 0.06479 208.54)",
+          "oklch(26.43% 0.06479 208.54)",
+          "oklch(37.86% 0.06479 208.54)",
+          "oklch(49.29% 0.06479 208.54)",
+          "oklch(60.71% 0.06479 208.54)",
+          "oklch(72.14% 0.06479 208.54)",
+          "oklch(83.57% 0.06479 208.54)",
+          "oklch(95.00% 0.06479 208.54)"
+        ]
+      },
+      "seafoam-pressed": {
+        "role": "tertiary",
+        "displayName": "Seafoam Pressed",
+        "tonalRamp": [
+          "oklch(15.00% 0.03021 183.73)",
+          "oklch(26.43% 0.03021 183.73)",
+          "oklch(37.86% 0.03021 183.73)",
+          "oklch(49.29% 0.03021 183.73)",
+          "oklch(60.71% 0.03021 183.73)",
+          "oklch(72.14% 0.03021 183.73)",
+          "oklch(83.57% 0.03021 183.73)",
+          "oklch(95.00% 0.03021 183.73)"
+        ]
+      },
+      "field-border": {
+        "role": "neutral",
+        "displayName": "Field Border",
+        "tonalRamp": [
+          "oklch(15.00% 0.02713 183.73)",
+          "oklch(26.43% 0.02713 183.73)",
+          "oklch(37.86% 0.02713 183.73)",
+          "oklch(49.29% 0.02713 183.73)",
+          "oklch(60.71% 0.02713 183.73)",
+          "oklch(72.14% 0.02713 183.73)",
+          "oklch(83.57% 0.02713 183.73)",
+          "oklch(95.00% 0.02713 183.73)"
+        ]
+      },
+      "secondary-border": {
+        "role": "neutral",
+        "displayName": "Secondary Border",
+        "tonalRamp": [
+          "oklch(15.00% 0.03767 191.83)",
+          "oklch(26.43% 0.03767 191.83)",
+          "oklch(37.86% 0.03767 191.83)",
+          "oklch(49.29% 0.03767 191.83)",
+          "oklch(60.71% 0.03767 191.83)",
+          "oklch(72.14% 0.03767 191.83)",
+          "oklch(83.57% 0.03767 191.83)",
+          "oklch(95.00% 0.03767 191.83)"
+        ]
+      },
+      "error": {
+        "role": "neutral",
+        "displayName": "Error",
+        "tonalRamp": [
+          "oklch(15.00% 0.14280 29.60)",
+          "oklch(26.43% 0.14280 29.60)",
+          "oklch(37.86% 0.14280 29.60)",
+          "oklch(49.29% 0.14280 29.60)",
+          "oklch(60.71% 0.14280 29.60)",
+          "oklch(72.14% 0.14280 29.60)",
+          "oklch(83.57% 0.14280 29.60)",
+          "oklch(95.00% 0.14280 29.60)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Desktop welcome heading."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Creation form heading."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Profile nickname."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Welcome explanatory copy."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Action button label."
+      },
+      "support": {
+        "displayName": "Support",
+        "purpose": "Privacy and field helper text."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "state-transition",
+        "value": "160ms ease",
+        "purpose": "Button background and profile-card background/border transitions; button transitions disabled under prefers-reduced-motion. No entrance animation is implemented."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "profile-intermediate-max",
+        "value": "1100px"
+      },
+      {
+        "name": "profile-mobile-max",
+        "value": "760px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid action from the profile form.",
+      "html": "<button class=\"ds-primary\">Πάμε στο νησί <svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m14 5 7 7-7 7M21 12H3\"/></svg></button>",
+      "css": ".ds-primary{min-height:52px;display:inline-flex;align-items:center;justify-content:center;gap:12px;border-radius:12px;padding:13px 22px;font-weight:800;font-size:16px;line-height:1.5;transition:background .16s;cursor:pointer;font-family:Noto,system-ui,sans-serif;border:0;background:var(--teal,#087f8c);color:white}.ds-primary:hover{background:var(--teal-dark,#056570)}.ds-primary:active{background:#044d56}.ds-primary:focus-visible{outline:3px solid var(--teal-dark,#056570);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "Secondary action",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outlined new-profile action.",
+      "html": "<button class=\"ds-secondary\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg>Νέο προφίλ</button>",
+      "css": ".ds-secondary{min-height:52px;display:inline-flex;align-items:center;justify-content:center;gap:12px;border-radius:12px;padding:13px 22px;font-weight:800;font-size:16px;line-height:1.5;transition:background .16s;cursor:pointer;font-family:Noto,system-ui,sans-serif;background:transparent;color:var(--teal-dark,#056570);border:1px solid #7b9d9b}.ds-secondary:hover{background:var(--seafoam,#e5f4f0)}.ds-secondary:focus-visible{outline:3px solid var(--teal-dark,#056570);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "name": "Back action",
+      "kind": "button",
+      "refersTo": "button-back",
+      "description": "Quiet return action.",
+      "html": "<button class=\"ds-back\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m10 5-7 7 7 7M3 12h18\"/></svg>Πίσω στα προφίλ</button>",
+      "css": ".ds-back{font-family:Noto,system-ui,sans-serif;display:inline-flex;align-items:center;gap:10px;background:transparent;border:0;padding:8px 0;min-height:44px;color:var(--teal-dark,#056570);font-size:14px;font-weight:700;cursor:pointer}.ds-back:focus-visible{outline:3px solid var(--teal-dark,#056570);outline-offset:4px}"
+    },
+    {
+      "name": "Nickname field",
+      "kind": "input",
+      "refersTo": "input-nickname",
+      "description": "Labeled nickname input with the implemented focus and invalid states.",
+      "html": "<label class=\"ds-label\" for=\"ds-nickname\">Το ψευδώνυμό σου</label><input class=\"ds-input\" id=\"ds-nickname\" placeholder=\"π.χ. Αστερίας\" maxlength=\"24\" autocomplete=\"off\"/>",
+      "css": ".ds-label{font-family:Noto,system-ui,sans-serif;display:block;font-weight:750;font-size:16px;margin-bottom:8px;color:var(--navy,#16324f)}.ds-input{font-family:Noto,system-ui,sans-serif;width:100%;max-width:340px;background:var(--paper,#fffdf8);border:1px solid #718884;border-radius:12px;padding:14px 16px;font-size:18px;color:var(--navy,#16324f);min-height:56px;caret-color:var(--teal-dark,#056570)}.ds-input::placeholder{color:#64747d}.ds-input[aria-invalid=true]{border-color:#a1372b}.ds-input:focus-visible{outline:3px solid var(--teal-dark,#056570);outline-offset:4px}"
+    },
+    {
+      "name": "Brand link",
+      "kind": "nav",
+      "refersTo": "brand-navigation",
+      "description": "Original lightning mark and Greek wordmark.",
+      "html": "<a class=\"ds-brand\" href=\"#main\"><span class=\"ds-mark\"><svg width=\"26\" height=\"30\" viewBox=\"0 0 26 30\" aria-hidden=\"true\"><path d=\"M15 1 3 17h9l-2 12 13-18h-9z\" fill=\"currentColor\"/></svg></span><span>Το Νησί των<br/>Ανακαλύψεων</span></a>",
+      "css": ".ds-brand{font-family:Noto,system-ui,sans-serif;display:inline-flex;align-items:center;gap:13px;text-decoration:none;font-size:19px;font-weight:850;line-height:1.18;letter-spacing:-.025em;color:var(--navy,#16324f)}.ds-mark{width:48px;height:52px;border-radius:16px 16px 16px 6px;display:grid;place-items:center;background:var(--teal,#087f8c);color:var(--yellow,#ffd166)}.ds-brand:focus-visible{outline:3px solid var(--teal-dark,#056570);outline-offset:4px}"
+    },
+    {
+      "name": "Profile card shell",
+      "kind": "card",
+      "refersTo": "profile-card",
+      "description": "Extracted card shell and nickname; raster avatar intentionally omitted from this isolated snippet. Full artwork is in public/assets/island-avatars.png.",
+      "html": "<button class=\"ds-card\"><span class=\"ds-card-name\">Ελένη</span><span class=\"ds-card-arrow\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m14 5 7 7-7 7M21 12H3\"/></svg></span></button>",
+      "css": ".ds-card{font-family:Noto,system-ui,sans-serif;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:176px;min-width:150px;padding:18px 10px 20px;background:var(--paper,#fffdf8);color:var(--navy,#16324f);border:1px solid var(--line,#d9ded5);border-radius:var(--radius,16px);transition:background .16s,border-color .16s;cursor:pointer}.ds-card-name{font-size:19px;font-weight:800;text-align:center;overflow-wrap:anywhere;line-height:1.4}.ds-card-arrow{position:absolute;right:9px;top:9px;color:var(--teal-dark,#056570);opacity:0}.ds-card:hover{background:var(--seafoam,#e5f4f0);border-color:var(--teal,#087f8c)}.ds-card:active{background:#cde9e4}.ds-card:hover .ds-card-arrow,.ds-card:focus-visible .ds-card-arrow{opacity:1}.ds-card:focus-visible{outline:3px solid var(--teal-dark,#056570);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-card{transition:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Το Νησί των Ανακαλύψεων",
+    "overview": "The existing island identity pairs warm cream surfaces and navy Greek text with teal controls, yellow accents and original illustrated artwork. Preserve the name, bundled Noto Sans, the original island and Σπίθα artwork, and the cream/teal/navy/coral/yellow palette established in PRODUCT.md.\n\nThis is a scan of the implemented profile design preview in src/App.jsx and src/index.css, not a specification for completed missions or production profile persistence. The welcome-and-choice composition belongs to this surface; future screens inherit the identity, not its grid.",
+    "keyCharacteristics": [
+      "Warm, light surfaces with readable Greek typography.",
+      "Original Σπίθα and illustrated island objects give the interface its character.",
+      "Clear teal actions, quiet borders and visible keyboard focus."
+    ],
+    "rules": [],
+    "dos": [
+      "Do preserve the approved name, palette, original artwork and bundled Greek font.",
+      "Do use visible focus and keyboard-operable controls alongside touch interaction.",
+      "Do keep the preview disclosure visible on mobile and desktop while this remains a preview.",
+      "Do scope the observed profile grid and welcome composition to the profile surface."
+    ],
+    "donts": [
+      "Don't replace Σπίθα or the identity with an unrelated visual direction.",
+      "Don't make successful interaction depend on animation or audio.",
+      "Don't describe temporary preview profiles as persistent production data.",
+      "Don't treat coral as an observed action or error color; it is a preserved identity accent."
+    ]
+  }
+}

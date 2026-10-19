@@ -45,7 +45,7 @@ Teacher-led use does not introduce teacher accounts, student accounts, class man
 ### Implementation
 
 - The user selected React, Vite, Tailwind CSS, and Motion. This supersedes the original native-JavaScript-only implementation constraint.
-- The current repository contains the working toolchain and a temporary Greek placeholder. Missions, profiles, original artwork, and bundled fonts have not yet been migrated.
+- The current repository contains the working toolchain and a responsive profile-screen design preview: chooser, first-visit state, in-place avatar/nickname form, and selection acknowledgement. Original Σπίθα artwork and bundled Noto Sans are included, with new island-themed avatar illustrations. Profiles are temporary sample/in-memory data; the island map, missions, persistent profiles, and legacy import are not implemented.
 - Deliver a static `dist/` application with a hosting fallback to `index.html` for history routes.
 - Preserve the original site's identity in `.openai/hosting.json` when migrating hosting, and preserve its existing audience. Do not invent an identity or publish as part of initialization.
 - Work incrementally, with discrete reviewable milestones.
@@ -62,9 +62,9 @@ Teacher-led use does not introduce teacher accounts, student accounts, class man
 
 ### Open decisions
 
-- The specific learning objective, experiment, story, and challenge for each introductory mission.
+- The electricity lesson and learner flow are approved in `docs/electricity-lesson.md` and `docs/learner-flow-brief.md`. The other four introductory missions still need learning objectives, experiments, stories, and challenges.
 - Reading and support adaptations across ages 8–12.
-- Profile creation, selection, deletion, and legacy-progress import details.
+- Profile chooser and in-place creation layout are approved in `docs/learner-flow-brief.md`. Final validation policy, persistent storage, deletion, and legacy-progress import details remain open.
 - The exact teacher facilitation materials or controls, if any; teacher-led use alone does not imply additional tools.
 
 ## Brand Commitments
