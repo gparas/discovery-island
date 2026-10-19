@@ -38,7 +38,7 @@ export interface Mission {
   readonly playable: boolean
 }
 
-/** A topic islet on the map. */
+/** One of the five topics on the map. */
 export interface Topic {
   readonly id: TopicId
   readonly name: string

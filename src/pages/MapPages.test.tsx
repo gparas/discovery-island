@@ -42,7 +42,7 @@ describe('map', () => {
     await user.click(screen.getByRole('link', { name: /Ήχος/ }))
     expect(path()).toBe('/map/sound')
     expect(screen.getByRole('heading', { level: 1, name: 'Ήχος' })).toHaveFocus()
-    expect(screen.getByRole('heading', { level: 2, name: 'Σύντομα' })).toBeInTheDocument()
+    expect(screen.getByText('Οι αποστολές για αυτό το θέμα ετοιμάζονται.')).toBeInTheDocument()
     await user.click(screen.getAllByRole('link', { name: 'Πίσω στον χάρτη' })[0]!)
     expect(path()).toBe('/map')
   })

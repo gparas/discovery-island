@@ -3,6 +3,7 @@ import { Avatar } from '../components/Avatar.tsx'
 import { BackLink } from '../components/BackLink.tsx'
 import { useFocusOnNavigation } from '../hooks/useFocusOnNavigation.ts'
 import { ElectricityLesson } from '../lessons/electricity/ElectricityLesson.tsx'
+import { TopicArt } from '../map/TopicArt.tsx'
 import { findMission, findTopic, missingRequirements, missionTitle } from '../map/topics.ts'
 import { useMissionProgress } from '../map/useMissionProgress.ts'
 import { useCurrentProfile } from '../profiles/useProfiles.ts'
@@ -29,6 +30,7 @@ function UnavailableMission({ topic, mission, reason }: { topic: Topic; mission:
   const heading = useFocusOnNavigation<HTMLHeadingElement>()
   return <main id="main" className="mission-placeholder">
     <p className="mission-profile"><Avatar index={profile.avatar} /><span>{profile.name}</span></p>
+    <TopicArt topicId={topic.id} className="mission-placeholder-art" />
     <p className="mission-topic">{topic.name}</p>
     <h1 ref={heading} tabIndex={-1}>{mission.title}</h1>
     <p>{reason}</p>

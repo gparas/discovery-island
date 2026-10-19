@@ -3,8 +3,8 @@ import { Link, Navigate, useParams } from 'react-router'
 import { BackLink } from '../components/BackLink.tsx'
 import { useFocusOnNavigation } from '../hooks/useFocusOnNavigation.ts'
 import { useLessonProgress } from '../lessons/useLessonProgress.ts'
-import { Islet } from '../map/Islet.tsx'
 import { completedCount, currentMission, findMission, findTopic, missingRequirements, missionStatus, missionTitle, type MissionProgress } from '../map/topics.ts'
+import { TopicArt } from '../map/TopicArt.tsx'
 import { useMissionProgress } from '../map/useMissionProgress.ts'
 import { useCurrentProfile } from '../profiles/useProfiles.ts'
 import { paths } from '../routes/paths.ts'
@@ -23,7 +23,7 @@ function stationNote(mission: Mission, progress: MissionProgress): string {
   return { available: 'Έτοιμη για εξερεύνηση', 'in-progress': 'Σε εξέλιξη', completed: 'Ολοκληρώθηκε' }[status]
 }
 
-/** Placeholder topic map: the topic's islet with its missions as numbered stations along a path, and a detail card. */
+/** A topic: its island art beside the selected mission, and the missions below as numbered stations along a path. */
 function TopicMap({ topic }: { topic: Topic }) {
   const profile = useCurrentProfile()
   const progress = useMissionProgress(profile.id)
@@ -33,20 +33,21 @@ function TopicMap({ topic }: { topic: Topic }) {
   const selected = findMission(topic, selectedId) ?? current
   return <main id="main" className={`topic-page topic-${topic.id}`}>
     <BackLink className="back-button" to={paths.map}>Πίσω στον χάρτη</BackLink>
-    <div className="map-intro">
-      <div>
-        <p className="eyebrow">Θέμα</p>
-        <h1 ref={heading} tabIndex={-1}>{topic.name}</h1>
-      </div>
-    </div>
     {topic.missions.length === 0 || !selected
-      ? <section className="topic-soon">
-          <Islet />
-          <h2>Σύντομα</h2>
-          <p>Οι αποστολές για αυτό το θέμα ετοιμάζονται.</p>
-          <BackLink className="button primary" to={paths.map}>Πίσω στον χάρτη</BackLink>
+      ? <section className="topic-hero">
+          <h1 ref={heading} tabIndex={-1}>{topic.name}</h1>
+          <TopicArt topicId={topic.id} />
+          <div className="topic-soon">
+            <p>Οι αποστολές για αυτό το θέμα ετοιμάζονται.</p>
+            <BackLink className="button primary" to={paths.map}>Πίσω στον χάρτη</BackLink>
+          </div>
         </section>
-      : <div className="topic-layout">
+      : <>
+          <div className="topic-hero">
+            <h1 ref={heading} tabIndex={-1}>{topic.name}</h1>
+            <TopicArt topicId={topic.id} />
+            <MissionCard topic={topic} mission={selected} number={topic.missions.indexOf(selected) + 1} profile={profile} progress={progress} onSelect={setSelectedId} />
+          </div>
           <section className="topic-path" aria-labelledby="path-title">
             <h2 id="path-title" className="path-title">Το μονοπάτι σου <span>{completedCount(topic, progress)} / {topic.missions.length}</span></h2>
             <ol className="stations">
@@ -59,8 +60,7 @@ function TopicMap({ topic }: { topic: Topic }) {
               </li>)}
             </ol>
           </section>
-          <MissionCard topic={topic} mission={selected} number={topic.missions.indexOf(selected) + 1} profile={profile} progress={progress} onSelect={setSelectedId} />
-        </div>}
+        </>}
   </main>
 }
 
@@ -79,8 +79,7 @@ function MissionCard({ topic, mission, number, profile, progress, onSelect }: Mi
   const missing = missingRequirements(mission, progress)
   const to = paths.mission(topic.id, mission.id)
   return <section className="mission-card" aria-labelledby="mission-card-title">
-    <p className="eyebrow">Αποστολή {number} · {topic.name}</p>
-    <h2 id="mission-card-title">{mission.title}</h2>
+    <h2 id="mission-card-title"><span className="mission-number" aria-hidden="true">{number}</span>{mission.title}</h2>
     <p className="mission-goal">{mission.goal}</p>
     {status === 'locked'
       ? <>
