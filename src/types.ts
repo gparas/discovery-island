@@ -10,7 +10,7 @@ export interface Profile {
 /** Which welcome copy accompanies the profile panel. */
 export type WelcomeView = 'choose' | 'create'
 
-export type IconKind = 'plus' | 'back' | 'arrow'
+export type IconKind = 'plus' | 'back' | 'arrow' | 'chevron'
 
 /** The in-progress values of the profile creation form, kept while the learner leaves and returns to it. */
 export interface ProfileDraft {

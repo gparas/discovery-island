@@ -209,6 +209,10 @@
       margin-left: auto;
       justify-content: flex-end;
 
+      @media (min-width: 761px) {
+        & a { margin-left: 6px; padding-left: 16px; border-left: 1px solid var(--color-line); }
+      }
+
       /* Phones: avatar beside a name-over-link stack, so the badge stays narrow at 320px. */
       @media (max-width: 760px) {
         display: grid;

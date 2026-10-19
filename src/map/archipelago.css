@@ -7,43 +7,44 @@
 
     @media (max-width: 760px) { padding: 20px 24px 32px; }
   }
-  .archipelago-page > .resume-link {
-    display: flex;
-    width: fit-content;
-    max-width: 100%;
-    margin-bottom: 20px;
-    white-space: normal;
+
+  /* Explorer's Basecamp: list beside the scene, Σπίθα's panel under the scene. */
+  .basecamp {
+    display: grid;
+    grid-template-columns: minmax(300px, 400px) minmax(0, 1fr);
+    grid-template-areas: "list map" "list panel";
+    gap: 20px 28px;
+    align-items: start;
+
+    @media (max-width: 899px) {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "prompt" "panel" "list" "map";
+      gap: 16px;
+    }
   }
 
-  /* Phones only: Σπίθα's prompt, which the scene's speech bubble carries on desktop. */
+  /* Phones only: Σπίθα's prompt; on desktop the panel carries her. */
   .map-prompt {
+    grid-area: prompt;
     display: none;
     align-items: center;
     gap: 12px;
-    margin: 0 0 16px;
+    margin: 0;
     font-size: 1.1875rem;
     font-weight: 800;
     line-height: 1.25;
 
-    & img { width: 56px; height: 56px; object-fit: contain; }
+    & img { width: 56px; height: auto; }
 
     @media (max-width: 899px) { display: flex; }
-  }
-
-  .archipelago-layout {
-    display: grid;
-    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
-    gap: 24px;
-    align-items: start;
-
-    @media (max-width: 899px) { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   }
 
   /* ── Topic list: the navigation ───────────────────────────── */
 
   .topic-list {
+    grid-area: list;
     display: grid;
-    gap: 10px;
+    gap: 12px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -52,58 +53,79 @@
   }
   .topic-card {
     display: grid;
-    grid-template-columns: 88px minmax(0, 1fr) auto;
+    grid-template-columns: 120px minmax(0, 1fr) auto;
     align-items: center;
-    gap: 14px;
-    min-height: 88px;
-    padding: 6px 16px 6px 8px;
+    gap: 16px;
+    min-height: 112px;
+    padding: 6px 18px 6px 8px;
     border: 1px solid var(--color-line);
     border-radius: var(--radius-card);
     background: var(--color-paper);
     color: var(--color-navy);
     text-decoration: none;
-    transition: background-color 160ms ease-out, border-color 160ms ease-out;
+    transition: background-color 160ms ease-out, border-color 160ms ease-out, box-shadow 160ms ease-out;
 
-    &:hover, &.is-active { background: var(--color-seafoam); border-color: var(--color-outline-soft); }
+    &:hover { border-color: var(--color-outline-soft); }
+    /* The selection feeds Σπίθα's panel, which phones only show when resuming. */
+    @media (min-width: 900px) {
+      &.is-active {
+        background: var(--color-hint);
+        border-color: var(--color-teal);
+        box-shadow: inset 0 0 0 1px var(--color-teal);
+      }
+    }
     &:active { background: var(--color-seafoam-pressed); }
-    &:focus-visible { outline: 3px solid var(--color-navy); outline-offset: 2px; }
+    &:focus-visible { outline: 3px solid var(--color-navy); outline-offset: 3px; }
 
-    @media (max-width: 760px) { grid-template-columns: 72px minmax(0, 1fr) auto; min-height: 76px; gap: 12px; }
+    @media (max-width: 760px) { grid-template-columns: 88px minmax(0, 1fr) auto; min-height: 84px; gap: 12px; }
   }
   .topic-thumb {
     width: 100%;
     height: auto;
-    aspect-ratio: 104 / 88;
+    aspect-ratio: 136 / 115;
     object-fit: contain;
-    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .topic-card:hover .topic-thumb, .topic-card.is-active .topic-thumb { transform: translateY(-3px) scale(1.04); }
-  .topic-text { display: grid; gap: 2px; min-width: 0; }
+  @media (min-width: 900px) { .topic-card.is-active .topic-thumb { transform: translateY(-3px) scale(1.05); } }
+  .topic-text { display: grid; gap: 4px; min-width: 0; }
   .topic-name {
-    font-size: 1.3125rem;
+    font-size: 1.625rem;
     font-weight: 850;
-    line-height: 1.2;
+    line-height: 1.15;
     letter-spacing: -0.02em;
     overflow-wrap: anywhere;
 
-    @media (max-width: 760px) { font-size: 1.1875rem; }
+    @media (max-width: 760px) { font-size: 1.25rem; }
   }
-  .topic-progress { font-size: 0.875rem; font-weight: 700; color: var(--color-teal-dark); }
+  .topic-progress {
+    font-size: 0.9375rem;
+    font-weight: 750;
+    color: var(--color-teal-dark);
+
+    &.is-soon { color: var(--color-muted); font-weight: 650; }
+  }
   .topic-chevron { display: flex; color: var(--color-teal-dark); }
 
   /* ── Island scene ─────────────────────────────────────────── */
 
-  /* Scene and hotspots share one coordinate system; never crop with cover on desktop. */
+  /* Scene and hotspots share one coordinate system; never crop with cover on desktop.
+     The sea feathers into the page so the island reads as a place, not a framed picture. */
   .archipelago-sea {
+    grid-area: map;
     position: relative;
     isolation: isolate;
     aspect-ratio: 1625 / 968;
-    overflow: hidden;
-    border-radius: 24px;
-    background: var(--color-sea);
   }
   .archipelago-scene, .archipelago-scene img { display: block; width: 100%; height: 100%; }
-  .archipelago-scene { position: absolute; inset: 0; pointer-events: none; }
+  .archipelago-scene {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mask-image:
+      linear-gradient(to right, transparent, #000 6%, #000 94%, transparent),
+      linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
+    mask-composite: intersect;
+  }
   .archipelago-islands { position: absolute; inset: 0; }
   .island-link {
     position: absolute;
@@ -119,43 +141,86 @@
   .destination-sound { left: 34%; top: 43%; width: 31%; height: 41%; }
   .destination-forces { left: 66%; top: 51%; width: 33%; height: 45%; }
   .island-caption {
+    position: relative;
     padding: 6px 16px;
     border-radius: 999px;
-    background: var(--color-cream);
+    background: var(--color-paper);
     color: var(--color-navy);
     font-size: clamp(0.875rem, 1.3vw, 1.125rem);
     font-weight: 850;
-    box-shadow: 0 2px 8px rgb(22 50 79 / 0.18);
-    transition: background-color 160ms ease-out, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--color-navy) 20%, transparent);
+    transition: background-color 160ms ease-out;
   }
-  .island-link:hover .island-caption, .island-link.is-active .island-caption {
-    background: var(--color-yellow);
-    transform: translateY(-3px);
-  }
-  .map-guide {
+  .island-link:hover .island-caption, .island-link.is-active .island-caption { background: var(--color-yellow); }
+  .map-pin {
     position: absolute;
-    top: 74%;
-    left: 17%;
-    max-width: 20%;
-    margin: 0;
-    padding: 10px 16px;
-    border-radius: 24px 24px 24px 4px;
-    background: var(--color-cream);
-    font-size: clamp(0.8125rem, 1.2vw, 1.125rem);
-    font-weight: 800;
-    line-height: 1.25;
-    pointer-events: none;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    translate: -50% 0;
+    color: var(--color-teal);
+    filter: drop-shadow(0 3px 4px color-mix(in srgb, var(--color-navy) 30%, transparent));
+    animation: pin-drop 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes pin-drop {
+    from { transform: translateY(-10px); opacity: 0; }
+  }
+
+  /* ── Σπίθα's panel ───────────────────────────────────────── */
+
+  .spitha-panel {
+    grid-area: panel;
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 24px 16px 16px;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    background: var(--color-paper);
+
+    & h2 {
+      margin: 0;
+      font-size: 1.75rem;
+      font-weight: 850;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    & p { margin: 6px 0 0; color: var(--color-muted); font-size: 1rem; line-height: 1.5; text-wrap: pretty; }
+
+    /* Phones show the panel only to resume a mission; otherwise the list is the whole task. */
+    @media (max-width: 899px) {
+      grid-template-columns: 64px minmax(0, 1fr);
+      gap: 4px 14px;
+      padding: 14px 16px;
+
+      &:not(.is-resume) { display: none; }
+      & h2 { font-size: 1.25rem; }
+      & .button { grid-column: 1 / -1; margin-top: 10px; }
+    }
+  }
+  .spitha-panel-art {
+    width: 100%;
+    height: auto;
+    margin-block: -36px -8px;
+
+    @media (max-width: 899px) { margin: 0; }
   }
 
   /* Phones and narrow tablets: the list is the map; the scene becomes a decorative banner. */
   @media (max-width: 899px) {
-    .archipelago-sea { aspect-ratio: 16 / 7; border-radius: var(--radius-card); }
+    .archipelago-sea {
+      aspect-ratio: 16 / 7;
+      overflow: hidden;
+      border-radius: var(--radius-card);
+      background: var(--color-sea);
+    }
+    .archipelago-scene { mask-image: none; }
     .archipelago-scene img { object-fit: cover; object-position: 50% 40%; }
-    .archipelago-islands, .map-guide { display: none; }
+    .archipelago-islands { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     .topic-card, .topic-thumb, .island-caption { transition: none; }
-    .topic-card:hover .topic-thumb, .topic-card.is-active .topic-thumb,
-    .island-link:hover .island-caption, .island-link.is-active .island-caption { transform: none; }
+    .topic-card.is-active .topic-thumb { transform: none; }
+    .map-pin { animation: none; }
   }
 }

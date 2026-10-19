@@ -26,6 +26,17 @@ describe('map', () => {
     expect(screen.queryByRole('link', { name: /Συνέχισε την αποστολή/ })).not.toBeInTheDocument()
   })
 
+  it('features the selected topic in Σπίθα’s panel', async () => {
+    const { user } = await enterMap()
+    const panel = () => screen.getByRole('region', { name: /Ηλεκτρισμός|Ήχος/ })
+    expect(panel()).toHaveTextContent('Ανακάλυψε τι χρειάζεται μια λάμπα για να ανάψει.')
+    expect(screen.getByRole('link', { name: 'Εξερεύνησε' })).toHaveAttribute('href', '/map/electricity')
+
+    await user.hover(screen.getByRole('link', { name: 'Ήχος, Σύντομα' }))
+    expect(panel()).toHaveTextContent('Οι αποστολές για αυτό το θέμα ετοιμάζονται.')
+    expect(screen.getByRole('link', { name: 'Εξερεύνησε' })).toHaveAttribute('href', '/map/sound')
+  })
+
   it('opens a topic without missions as a coming-soon page', async () => {
     const { user, path } = await enterMap()
     await user.click(screen.getByRole('link', { name: /Ήχος/ }))
