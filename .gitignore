@@ -1,0 +1,53 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment secrets (keep a sanitized example trackable)
+.env
+.env.*
+!.env.example
+
+# Generated checks and caches
+coverage/
+playwright-report/
+test-results/
+.vite/
+.cache/
+*.tsbuildinfo
+
+# Impeccable local overrides and generated runtime data
+# Keep shared config, PRODUCT.md, DESIGN.md and design briefs tracked.
+.impeccable/config.local.json
+.impeccable/cache/
+.impeccable/logs/
+.impeccable/tmp/
+
+# Locally installed agent skills (reinstall with the skill installer)
+.agents/skills/
+.codex/skills/
+.claude/skills/
+.claude/settings.local.json
+
+# Impeccable installer-managed helper agents
+.claude/agents/impeccable-*.md
