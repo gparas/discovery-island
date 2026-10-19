@@ -128,11 +128,11 @@ Help and demonstrations remain available; completing with help is a valid suppor
 
 **Summary:** «Δοκίμασες πώς ανάβει μια λάμπα. Στο κύκλωμά μας χρειάζεται μια ολόκληρη διαδρομή: από τον έναν πόλο της μπαταρίας, μέσα από τη λάμπα, ως τον άλλο πόλο.»
 
-**Primary action:** «Πίσω στο νησί»
+**Primary action:** «Πίσω στον Ηλεκτρισμό» (returns to the electricity topic map; the mission shell's back link uses the same label)
 
 **Secondary action:** «Παίξε ξανά»
 
-Mark the mission completed. Do not award mastery labels, penalize assistance, or lock/unlock other topics. Replay starts a new run while keeping the original prediction, first explanation, first challenge test, assistance record, and earlier completed runs.
+Mark the mission completed. Do not award mastery labels, penalize assistance, or lock/unlock other topics. Completing this mission makes the electricity missions that require it available on the topic map (see [learner-flow-brief.md](learner-flow-brief.md)). Replay starts a new run while keeping the original prediction, first explanation, first challenge test, assistance record, and earlier completed runs.
 
 ## Continuity and implementation boundaries
 
