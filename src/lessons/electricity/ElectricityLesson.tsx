@@ -2,7 +2,7 @@ import { useEffect, useRef, type ReactNode } from 'react'
 import { Link } from 'react-router'
 import { useCurrentProfile } from '../../profiles/useProfiles.ts'
 import { paths } from '../../routes/paths.ts'
-import type { Mission } from '../../types.ts'
+import type { Mission, Topic } from '../../types.ts'
 import { useElectricityLesson } from '../useLessonProgress.ts'
 import { CircuitBoard } from './CircuitBoard.tsx'
 import { isLit, nextConnection, type Terminal } from './circuit.ts'
@@ -21,13 +21,14 @@ const predictions: readonly Prediction[] = ['yes', 'no', 'unsure']
 const explanationOrder: readonly ExplanationChoice[] = [0, 1, 2]
 
 /** «Άναψε τη λάμπα»: story → prediction → build → explain → fresh challenge → completion. */
-export function ElectricityLesson({ mission }: { mission: Mission }) {
+export function ElectricityLesson({ topic, mission }: { topic: Topic; mission: Mission }) {
   const profile = useCurrentProfile()
   const [progress, dispatch] = useElectricityLesson(profile.id)
   const run = progress.current
   const stageHeading = useStageFocus(run.stage)
-  const view = stageView(run, dispatch)
+  const view = stageView(run, dispatch, topic)
   return <MissionShell
+    topic={topic}
     mission={mission}
     profile={profile}
     step={stageStep[run.stage]}
@@ -60,7 +61,7 @@ interface StageView {
   readonly panel: ReactNode
 }
 
-function stageView(run: Run, dispatch: Dispatch): StageView {
+function stageView(run: Run, dispatch: Dispatch, topic: Topic): StageView {
   switch (run.stage) {
     case 'story':
       return {
@@ -145,7 +146,7 @@ function stageView(run: Run, dispatch: Dispatch): StageView {
         heading: copy.complete.title,
         panel: <>
           <div className="panel-guide"><Spitha /><p className="panel-speech">{copy.complete.summary}</p></div>
-          <Link className="button primary panel-action" to={paths.island}>{copy.complete.back}</Link>
+          <Link className="button primary panel-action" to={paths.topic(topic.id)}>{topic.backLabel}</Link>
           <button type="button" className="button secondary panel-action" onClick={() => dispatch({ type: 'replay' })}>{copy.complete.replay}</button>
         </>,
       }

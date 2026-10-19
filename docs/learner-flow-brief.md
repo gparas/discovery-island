@@ -97,6 +97,6 @@ The current React/Vite/Tailwind/Motion foundation remains the implementation tar
 - Avatar choices, nickname validation, profile management/deletion, and the legacy-progress import mapping need specification before persistent profile data ships. Do not silently discard or overwrite old progress.
 - Map artwork: new isometric islets versus reuse of the original island illustration, and the landmarks for the four other topics.
 - Lesson specs for «Ποιο υλικό βοηθά;» and «Έλεγξε το φως», and the missions of the other four topics.
-- The implemented lesson currently lives at `/island/missions/electricity` and the island screen is a stand-in; both move to the `/map` routes when the placeholder pages are built.
+- The map and topic pages are flat placeholders (`src/pages/MapPage.tsx`, `src/pages/TopicPage.tsx`); old `/island` URLs redirect to `/map`. Their interface copy («Πού θα εξερευνήσεις σήμερα;», «Άλλαξε προφίλ», «Ξεκίνα την αποστολή», «Σε εξέλιξη», «Οι αποστολές για αυτό το θέμα ετοιμάζονται.») awaits the owner's approval.
 - Other topics' lessons, teacher dashboards, online accounts, cross-device sync, leaderboards, and the Discovery Passport are outside this planning task.
 - This brief proposes interaction and layout intent; it does not approve final screen compositions or implement the app.

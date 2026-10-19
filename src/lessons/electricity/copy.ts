@@ -1,7 +1,7 @@
 import type { Terminal, Wire } from './circuit.ts'
 import type { BoardFeedback, ChallengeStatus, ExplanationChoice, Prediction } from './lesson.ts'
 
-/** Approved Greek copy from docs/electricity-lesson.md. Short shell labels are marked as interface copy. */
+/** Approved Greek copy from docs/electricity-lesson.md. Short shell labels are marked as interface copy; back actions use the topic's own label. */
 export const copy = {
   story: {
     speech: 'Καλώς ήρθες στο εργαστήριο του φάρου! Έχω μια μικρή λάμπα, μια μπαταρία και δύο καλώδια. Θέλεις να με βοηθήσεις να ανάψω τη λάμπα;',
@@ -41,7 +41,6 @@ export const copy = {
   complete: {
     title: 'Ολοκλήρωσες την αποστολή!',
     summary: 'Δοκίμασες πώς ανάβει μια λάμπα. Στο κύκλωμά μας χρειάζεται μια ολόκληρη διαδρομή: από τον έναν πόλο της μπαταρίας, μέσα από τη λάμπα, ως τον άλλο πόλο.',
-    back: 'Πίσω στο νησί',
     replay: 'Παίξε ξανά',
   },
   bulb: { off: 'Η λάμπα είναι σβηστή', on: 'Η λάμπα είναι αναμμένη' },

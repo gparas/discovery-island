@@ -5,8 +5,9 @@ import { RequireProfile } from '../layouts/RequireProfile.tsx'
 import { RootLayout } from '../layouts/RootLayout.tsx'
 import { SiteLayout } from '../layouts/SiteLayout.tsx'
 import { WelcomeLayout } from '../layouts/WelcomeLayout.tsx'
-import { IslandPage } from '../pages/IslandPage.tsx'
+import { MapPage } from '../pages/MapPage.tsx'
 import { MissionPage } from '../pages/MissionPage.tsx'
+import { TopicPage } from '../pages/TopicPage.tsx'
 import { paths } from './paths.ts'
 
 export const routes: RouteObject[] = [
@@ -26,10 +27,18 @@ export const routes: RouteObject[] = [
       {
         element: <RequireProfile />,
         children: [
-          { element: <SiteLayout />, children: [{ path: paths.island, element: <IslandPage /> }] },
+          {
+            element: <SiteLayout />,
+            children: [
+              { path: paths.map, element: <MapPage /> },
+              { path: paths.topicPattern, element: <TopicPage /> },
+            ],
+          },
           { path: paths.missionPattern, element: <MissionPage /> },
         ],
       },
+      // The island stand-in and its mission URLs moved to the map.
+      { path: '/island/*', element: <Navigate to={paths.map} replace /> },
       { path: '*', element: <Navigate to={paths.chooseProfile} replace /> },
     ],
   },

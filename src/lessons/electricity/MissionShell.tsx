@@ -3,10 +3,11 @@ import { Avatar } from '../../components/Avatar.tsx'
 import { BackLink } from '../../components/BackLink.tsx'
 import { useFocusOnNavigation } from '../../hooks/useFocusOnNavigation.ts'
 import { paths } from '../../routes/paths.ts'
-import type { Mission, Profile } from '../../types.ts'
+import type { Mission, Profile, Topic } from '../../types.ts'
 import { copy } from './copy.ts'
 
 interface Props {
+  readonly topic: Topic
   readonly mission: Mission
   readonly profile: Profile
   /** Index into the stage indicator; -1 before the first step, past the end once all are done. */
@@ -27,18 +28,18 @@ export function Spitha() {
 }
 
 /** The persistent mission frame: return to the island, stage indicator, profile, board, guide and action panel. */
-export function MissionShell({ mission, profile, step, instruction, note, board, tip, children }: Props) {
+export function MissionShell({ topic, mission, profile, step, instruction, note, board, tip, children }: Props) {
   const title = useFocusOnNavigation<HTMLHeadingElement>()
   return <div className="mission-shell">
     <header className="mission-bar">
-      <BackLink className="back-button" to={paths.island}>Πίσω στο νησί</BackLink>
+      <BackLink className="back-button" to={paths.topic(topic.id)}>{topic.backLabel}</BackLink>
       <StageIndicator step={step} />
       <p className="mission-profile"><Avatar index={profile.avatar} /><span>{profile.name}</span></p>
     </header>
     <main id="main" className="mission-main">
       <div className="mission-heading">
         <div>
-          <p className="mission-topic">{mission.topic}</p>
+          <p className="mission-topic">{topic.name}</p>
           <h1 ref={title} tabIndex={-1}>{mission.title}</h1>
           {instruction && <p className="mission-instruction">{instruction}</p>}
         </div>

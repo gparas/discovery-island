@@ -13,7 +13,8 @@ async function openLesson() {
   const router = createMemoryRouter(routes, { initialEntries: [paths.chooseProfile] })
   render(<RouterProvider router={router} />)
   await user.click(screen.getByRole('button', { name: 'Νίκος, Φάρος' }))
-  await user.click(screen.getByRole('link', { name: 'Άναψε τη λάμπα' }))
+  await user.click(screen.getByRole('link', { name: /Ηλεκτρισμός/ }))
+  await user.click(screen.getByRole('link', { name: 'Ξεκίνα την αποστολή' }))
   return { user, path: () => router.state.location.pathname }
 }
 
@@ -109,15 +110,15 @@ describe('electricity lesson', () => {
     await user.click(button('Παίξε ξανά'))
     expect(button('Ας εξερευνήσουμε!')).toBeInTheDocument()
 
-    await user.click(screen.getByRole('link', { name: 'Πίσω στο νησί' }))
-    expect(path()).toBe('/island')
+    await user.click(screen.getByRole('link', { name: 'Πίσω στον Ηλεκτρισμό' }))
+    expect(path()).toBe('/map/electricity')
   })
 
   it('resumes the same stage after leaving the lesson', async () => {
     const { user } = await openLesson()
     await reachBuild(user)
-    await user.click(screen.getByRole('link', { name: 'Πίσω στο νησί' }))
-    await user.click(screen.getByRole('link', { name: 'Άναψε τη λάμπα' }))
+    await user.click(screen.getByRole('link', { name: 'Πίσω στον Ηλεκτρισμό' }))
+    await user.click(screen.getByRole('link', { name: 'Συνέχισε την αποστολή' }))
     expect(screen.getByRole('heading', { level: 2, name: 'Μπορείς να αλλάξεις τις συνδέσεις ώστε να ανάψει;' })).toBeInTheDocument()
   })
 })

@@ -14,7 +14,7 @@ export function ProfileChooser() {
   const isEmpty = profiles.length === 0
   function enter(profile: Profile) {
     selectProfile(profile)
-    void navigate(paths.island)
+    void navigate(paths.map)
   }
   return <>
     <h2 id="panel-title" className="panel-title" ref={heading} tabIndex={-1}>{isEmpty ? 'Το πρώτο σου προφίλ' : 'Διάλεξε το προφίλ σου'}</h2>

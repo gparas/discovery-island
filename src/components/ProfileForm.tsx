@@ -17,7 +17,7 @@ export function ProfileForm() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const result = submitDraft()
-    if (result.ok) { void navigate(paths.island); return }
+    if (result.ok) { void navigate(paths.map); return }
     setError(result.error)
     nicknameInput.current?.focus()
   }

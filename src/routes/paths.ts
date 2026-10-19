@@ -1,12 +1,15 @@
 import { generatePath } from 'react-router'
-import type { MissionId } from '../types.ts'
+import type { MissionId, TopicId } from '../types.ts'
 
-const missionPattern = '/island/missions/:missionId'
+const topicPattern = '/map/:topicId'
+const missionPattern = '/map/:topicId/:missionId'
 
 export const paths = {
   chooseProfile: '/',
   newProfile: '/profiles/new',
-  island: '/island',
+  map: '/map',
+  topicPattern,
   missionPattern,
-  mission: (missionId: MissionId) => generatePath(missionPattern, { missionId }),
+  topic: (topicId: TopicId) => generatePath(topicPattern, { topicId }),
+  mission: (topicId: TopicId, missionId: MissionId) => generatePath(missionPattern, { topicId, missionId }),
 } as const

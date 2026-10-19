@@ -46,6 +46,14 @@
   --color-contact-edge: #99712f;
   --color-board-dot: #dcd8ca;
 
+  /* Map placeholders */
+  --color-sea: #1f6f86;
+  --color-sea-dot: #2b8199;
+  --color-stone: #8fd0d2;
+  --color-topic-light: #ffb88a;
+  --color-topic-sound: #b9d9ea;
+  --color-topic-forces: #c5dca0;
+
   /* Design-preview bar */
   --color-preview: #e5efea;
   --color-preview-ink: #36574f;
@@ -748,48 +756,429 @@
     margin-top: 18px;
   }
 
-  /* ── Selected profile (island stand-in) ──────────────────── */
+  /* ── Map and topic pages (flat placeholders) ────────────── */
 
-  .selected-state {
-    text-align: center;
-    padding: 26px 12px;
+  .topic-electricity {
+    --topic: var(--color-yellow);
+  }
 
-    & > .avatar {
-      margin: 0 auto 24px;
+  .topic-light {
+    --topic: var(--color-topic-light);
+  }
+
+  .topic-heat {
+    --topic: var(--color-coral);
+  }
+
+  .topic-sound {
+    --topic: var(--color-topic-sound);
+  }
+
+  .topic-forces {
+    --topic: var(--color-topic-forces);
+  }
+
+  .map-page,
+  .topic-page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 40px 32px 64px;
+
+    @media (max-width: 760px) {
+      padding: 24px 16px 40px;
+    }
+  }
+
+  .eyebrow {
+    color: var(--color-teal-dark);
+    font-size: 14px;
+    font-weight: 750;
+  }
+
+  .map-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px 24px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+
+    & h1 {
+      margin-top: 4px;
+      font-size: 36px;
+      font-weight: 850;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+
+      &:focus {
+        outline: none;
+      }
+
+      @media (max-width: 760px) {
+        font-size: 28px;
+      }
+    }
+  }
+
+  .explorer-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+
+    & .avatar {
+      width: 44px;
+      height: 44px;
+      padding: 3px;
     }
 
-    & h2 {
-      font-size: 30px;
-      font-weight: 800;
-      overflow-wrap: anywhere;
-      line-height: 1.4;
-    }
-
-    & > p {
-      margin-top: 16px;
-      color: var(--color-muted);
-      line-height: 1.8;
-    }
-
-    & .preview-next {
-      margin: 28px 0;
-      font-size: 14px;
-    }
-
-    & .back-to-profiles {
-      display: flex;
-      width: fit-content;
-      margin: 12px auto 0;
+    & a {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 4px;
       color: var(--color-teal-dark);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+  }
+
+  .explorer-name {
+    font-weight: 800;
+    overflow-wrap: anywhere;
+  }
+
+  .resume-link {
+    margin-bottom: 28px;
+  }
+
+  .islets {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+    padding: 32px 24px;
+    border-radius: 28px;
+    background: var(--color-sea);
+    background-image: radial-gradient(var(--color-sea-dot) 1.5px, transparent 1.5px);
+    background-size: 30px 30px;
+
+    @media (max-width: 760px) {
+      gap: 36px;
+      padding: 24px 12px;
+    }
+  }
+
+  /* Islets zigzag down the sea; the stones between them are decoration, not an order. */
+  .islet-item {
+    position: relative;
+    width: min(260px, 70%);
+    align-self: flex-start;
+    margin-left: 8%;
+
+    &:nth-child(even) {
+      align-self: flex-end;
+      margin: 0 8% 0 0;
+    }
+
+    /* Three stepping stones heading towards the next islet. */
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 62%;
+      top: calc(100% - 6px);
+      width: 96px;
+      height: 56px;
+      background:
+        radial-gradient(ellipse 9px 6px, var(--color-stone) 98%, transparent) 10px 4px / 20px 14px no-repeat,
+        radial-gradient(ellipse 9px 6px, var(--color-stone) 98%, transparent) 40px 20px / 20px 14px no-repeat,
+        radial-gradient(ellipse 9px 6px, var(--color-stone) 98%, transparent) 70px 36px / 20px 14px no-repeat;
+      pointer-events: none;
+    }
+
+    &:nth-child(even):not(:last-child)::after {
+      left: auto;
+      right: 62%;
+      transform: scaleX(-1);
     }
 
     @media (max-width: 760px) {
-      padding-top: 10px;
+      width: min(240px, 78%);
+      margin-left: 2%;
 
-      & .avatar-large {
-        width: 130px;
-        height: 130px;
+      &:nth-child(even) {
+        margin-right: 2%;
       }
+    }
+  }
+
+  .islet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px;
+    border-radius: var(--radius-card);
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.16s;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
+    &:focus-visible {
+      outline-color: var(--color-paper);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .islet-art {
+    width: 100%;
+    height: auto;
+  }
+
+  .islet-top {
+    fill: var(--topic);
+  }
+
+  .islet-side {
+    fill: var(--topic);
+    filter: brightness(0.82);
+
+    &.is-dark {
+      filter: brightness(0.68);
+    }
+  }
+
+  .landmark-top {
+    fill: var(--color-paper);
+  }
+
+  .landmark-side {
+    fill: var(--color-paper);
+    filter: brightness(0.86);
+
+    &.is-dark {
+      filter: brightness(0.74);
+    }
+  }
+
+  .islet-name {
+    padding: 4px 14px;
+    border-radius: 999px;
+    background: var(--color-paper);
+    font-size: 18px;
+    font-weight: 850;
+  }
+
+  .islet-status {
+    color: var(--color-paper);
+    font-size: 14px;
+    font-weight: 700;
+
+    &.is-soon {
+      opacity: 0.85;
+    }
+  }
+
+  .topic-page .back-button {
+    margin: 0 0 12px;
+  }
+
+  .topic-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 28px;
+    align-items: start;
+
+    @media (max-width: 860px) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .topic-path {
+    padding: 24px;
+    border-radius: 28px;
+    background: color-mix(in srgb, var(--topic) 26%, var(--color-paper));
+    border: 1px solid color-mix(in srgb, var(--topic) 60%, var(--color-line));
+
+    @media (max-width: 760px) {
+      padding: 18px 14px;
+    }
+  }
+
+  .path-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    font-size: 17px;
+    font-weight: 800;
+
+    & span {
+      font-variant-numeric: tabular-nums;
+      color: var(--color-muted);
+    }
+  }
+
+  .stations {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 24px;
+      bottom: 24px;
+      left: 31px;
+      border-left: 4px dashed color-mix(in srgb, var(--topic) 70%, var(--color-navy));
+      opacity: 0.45;
+    }
+  }
+
+  .station-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    &:nth-child(even) {
+      margin-left: 14%;
+
+      @media (max-width: 760px) {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .station {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    flex: 0 1 380px;
+    padding: 8px 18px 8px 8px;
+    border: 2px solid var(--color-line);
+    border-radius: 999px;
+    background: var(--color-paper);
+    text-align: left;
+
+    &:hover {
+      border-color: var(--color-outline-soft);
+    }
+
+    &[aria-pressed="true"] {
+      border-color: var(--color-teal);
+      box-shadow: 0 0 0 3px var(--color-seafoam-pressed);
+    }
+
+    .is-locked & {
+      background: color-mix(in srgb, var(--color-paper) 70%, var(--color-sand));
+      border-style: dashed;
+    }
+  }
+
+  .station-number {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-teal);
+    color: white;
+    font-size: 20px;
+    font-weight: 850;
+
+    .is-completed & {
+      background: var(--color-teal-dark);
+    }
+
+    .is-locked & {
+      background: var(--color-sand);
+      color: var(--color-muted);
+    }
+  }
+
+  .station-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .station-title {
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .station-note {
+    font-size: 13px;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+
+  .station-spitha {
+    width: 56px;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .mission-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+    background: var(--color-paper);
+
+    & h2 {
+      font-size: 26px;
+      font-weight: 850;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  .mission-goal {
+    line-height: 1.7;
+  }
+
+  .mission-lock {
+    padding: 12px 14px;
+    border-radius: var(--radius-control);
+    background: var(--color-sand);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .topic-soon {
+    max-width: 440px;
+    margin: 0 auto;
+    text-align: center;
+
+    & .islet-art {
+      width: 220px;
+      margin: 0 auto 12px;
+      display: block;
+    }
+
+    & h2 {
+      font-size: 26px;
+      font-weight: 850;
+    }
+
+    & p {
+      margin: 10px 0 24px;
+      color: var(--color-muted);
+      line-height: 1.7;
     }
   }
 

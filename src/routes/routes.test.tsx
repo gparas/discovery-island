@@ -39,15 +39,15 @@ describe('profile selection route', () => {
     expect(document.body).toHaveFocus()
   })
 
-  it('enters the island with the chosen profile', async () => {
+  it('enters the map with the chosen profile', async () => {
     const { user, path } = setup()
     await user.click(screen.getByRole('button', { name: 'Μαρία, Κοχύλι' }))
-    expect(path()).toBe('/island')
-    expect(panelHeading()).toHaveTextContent('Γεια σου, Μαρία!')
-    expect(panelHeading()).toHaveFocus()
-    expect(welcomeHeading()).toHaveTextContent('Έτοιμοι γιαανακαλύψεις;')
+    expect(path()).toBe('/map')
+    expect(welcomeHeading()).toHaveTextContent('Πού θα εξερευνήσεις σήμερα;')
+    expect(welcomeHeading()).toHaveFocus()
+    expect(screen.getByText('Μαρία')).toBeInTheDocument()
 
-    await user.click(screen.getByRole('link', { name: 'Πίσω στα προφίλ' }))
+    await user.click(screen.getByRole('link', { name: 'Άλλαξε προφίλ' }))
     expect(path()).toBe('/')
     expect(panelHeading()).toHaveFocus()
   })
@@ -107,18 +107,17 @@ describe('profile creation route', () => {
     expect(screen.getByText('24/24')).toBeInTheDocument()
   })
 
-  it('creates a profile, enters the island and lists it in the chooser', async () => {
+  it('creates a profile, enters the map and lists it in the chooser', async () => {
     const { user, path } = setup()
     await openForm(user)
     await user.click(screen.getByRole('radio', { name: 'Ήλιος' }))
     await user.type(nicknameField(), '  Αστερίας  ')
     await user.click(screen.getByRole('button', { name: 'Πάμε στο νησί' }))
 
-    expect(path()).toBe('/island')
-    expect(panelHeading()).toHaveTextContent('Γεια σου, Αστερίας!')
-    expect(panelHeading()).toHaveFocus()
+    expect(path()).toBe('/map')
+    expect(screen.getByText('Αστερίας')).toBeInTheDocument()
 
-    await user.click(screen.getByRole('link', { name: 'Πίσω στα προφίλ' }))
+    await user.click(screen.getByRole('link', { name: 'Άλλαξε προφίλ' }))
     expect(profileButtons()).toHaveLength(7)
     expect(screen.getByRole('button', { name: 'Αστερίας, Ήλιος' })).toBeInTheDocument()
 
@@ -151,7 +150,7 @@ describe('preview controls', () => {
     await user.click(screen.getByRole('link', { name: 'Δημιούργησε προφίλ' }))
     expect(nicknameField()).toHaveValue('')
     await user.type(nicknameField(), 'Ελένη{Enter}')
-    expect(path()).toBe('/island')
+    expect(path()).toBe('/map')
 
     await user.click(screen.getByRole('button', { name: 'Με προφίλ' }))
     expect(path()).toBe('/')
@@ -162,50 +161,27 @@ describe('preview controls', () => {
     const { user, navigate, path } = setup()
     await user.click(screen.getByRole('button', { name: 'Ελένη, Καραβάκι' }))
     await user.click(screen.getByRole('button', { name: 'Με προφίλ' }))
-    await navigate(paths.island)
+    await navigate(paths.map)
     expect(path()).toBe('/')
   })
 })
 
 describe('profile-only routes', () => {
-  it.each([paths.island, paths.mission('electricity')])('redirects %s to the chooser without a profile', path => {
+  it.each([paths.map, paths.topic('electricity'), paths.mission('electricity', 'light-the-bulb')])('redirects %s to the chooser without a profile', path => {
     const { path: current } = setup(path)
     expect(current()).toBe('/')
     expect(panelHeading()).toHaveTextContent('Διάλεξε το προφίλ σου')
   })
 
-  it('shows a placeholder for an unfinished mission and returns to the island', async () => {
+  it('redirects the old island URLs and unknown topics or missions', async () => {
     const { user, navigate, path } = setup()
     await user.click(screen.getByRole('button', { name: 'Νίκος, Φάρος' }))
-    await navigate(paths.mission('light'))
-
-    expect(path()).toBe('/island/missions/light')
-    const title = screen.getByRole('heading', { level: 1 })
-    expect(title).toHaveTextContent('Φως')
-    expect(title).toHaveFocus()
-    expect(screen.getByText('Νίκος')).toBeInTheDocument()
-    expect(screen.getByText('Αυτή η αποστολή δεν είναι ακόμη έτοιμη.')).toBeInTheDocument()
-
-    await user.click(screen.getByRole('link', { name: 'Πίσω στο νησί' }))
-    expect(path()).toBe('/island')
-    expect(panelHeading()).toHaveTextContent('Γεια σου, Νίκος!')
-  })
-
-  it('opens the electricity lesson from the island', async () => {
-    const { user, path } = setup()
-    await user.click(screen.getByRole('button', { name: 'Νίκος, Φάρος' }))
-    await user.click(screen.getByRole('link', { name: 'Άναψε τη λάμπα' }))
-
-    expect(path()).toBe('/island/missions/electricity')
-    expect(screen.getByRole('heading', { level: 1 })).toHaveFocus()
-    expect(screen.getByRole('button', { name: 'Ας εξερευνήσουμε!' })).toBeInTheDocument()
-  })
-
-  it('redirects an unknown mission to the island', async () => {
-    const { user, navigate, path } = setup()
-    await user.click(screen.getByRole('button', { name: 'Νίκος, Φάρος' }))
-    await navigate('/island/missions/volcanoes')
-    expect(path()).toBe('/island')
+    await navigate('/island/missions/electricity')
+    expect(path()).toBe('/map')
+    await navigate('/map/volcanoes')
+    expect(path()).toBe('/map')
+    await navigate('/map/electricity/volcanoes')
+    expect(path()).toBe('/map/electricity')
   })
 })
 
