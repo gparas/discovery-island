@@ -16,3 +16,10 @@ export type Screen =
 export type ScreenView = Screen['view']
 
 export type IconKind = 'plus' | 'back' | 'arrow'
+
+/** The in-progress values of the profile creation form. */
+export interface ProfileDraft {
+  readonly nickname: string
+  readonly avatar: AvatarIndex
+  readonly error: string
+}

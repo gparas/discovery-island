@@ -1,50 +1,13 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react'
-import type { AvatarIndex, IconKind, Profile, Screen } from './types.ts'
-
-const avatarIndexes: readonly AvatarIndex[] = [0, 1, 2, 3, 4, 5]
-const avatars = ['Καραβάκι', 'Φάρος', 'Κοχύλι', 'Φύλλο', 'Ήλιος', 'Ψαράκι'] as const satisfies Record<AvatarIndex, string>
-const exampleNames = ['Ελένη', 'Νίκος', 'Μαρία', 'Άρης', 'Δανάη', 'Πέτρος'] as const satisfies Record<AvatarIndex, string>
-const examples: readonly Profile[] = avatarIndexes.map(avatar => ({ id: `sample-${avatar}`, name: exampleNames[avatar], avatar }))
-
-function Avatar({ index, large = false }: { index: AvatarIndex; large?: boolean }) {
-  return <span className={`avatar avatar-${index}${large ? ' avatar-large' : ''}`} aria-hidden="true"><span className="avatar-art" style={{ backgroundPosition: `${(index % 3) * 50}% ${Math.floor(index / 3) * 100}%` }} /></span>
-}
-function Icon({ kind }: { kind: IconKind }) {
-  return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{kind === 'plus' ? <path d="M12 5v14M5 12h14" /> : kind === 'back' ? <path d="m10 5-7 7 7 7M3 12h18" /> : <path d="m14 5 7 7-7 7M21 12H3" />}</svg>
-}
+import { ProfileChooser } from './components/ProfileChooser.tsx'
+import { ProfileForm } from './components/ProfileForm.tsx'
+import { SelectedProfile } from './components/SelectedProfile.tsx'
+import { WelcomePanel } from './components/WelcomePanel.tsx'
+import { useFocusOnChange } from './hooks/useFocusOnChange.ts'
+import { useProfiles } from './profiles/useProfiles.ts'
 
 export default function App() {
-  const [profiles, setProfiles] = useState<readonly Profile[]>(examples)
-  const [screen, setScreen] = useState<Screen>({ view: 'choose' })
-  const [nickname, setNickname] = useState('')
-  const [avatar, setAvatar] = useState<AvatarIndex>(0)
-  const [error, setError] = useState('')
-  const heading = useRef<HTMLHeadingElement>(null)
-  const nicknameInput = useRef<HTMLInputElement>(null)
-  const firstRender = useRef(true)
-  const { view } = screen
-  useEffect(() => {
-    if (firstRender.current) { firstRender.current = false; return }
-    heading.current?.focus()
-  }, [view])
-  function showProfiles() { setScreen({ view: 'choose' }) }
-  function openForm() { setError(''); setScreen({ view: 'create' }) }
-  function selectProfile(profile: Profile) { setScreen({ view: 'selected', profile }) }
-  function resetPreview(empty: boolean) {
-    setProfiles(empty ? [] : examples)
-    setNickname(''); setAvatar(0); setError(''); showProfiles()
-  }
-  function createProfile(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const name = nickname.trim()
-    if (!name) { setError('Γράψε ένα ψευδώνυμο για το προφίλ σου.'); nicknameInput.current?.focus(); return }
-    if (profiles.some(profile => profile.name.toLocaleLowerCase('el') === name.toLocaleLowerCase('el'))) {
-      setError('Αυτό το ψευδώνυμο υπάρχει ήδη. Διάλεξε ένα διαφορετικό.'); nicknameInput.current?.focus(); return
-    }
-    const profile: Profile = { id: crypto.randomUUID(), name, avatar }
-    setProfiles(previous => [...previous, profile]); setNickname(''); selectProfile(profile)
-  }
-  const isEmpty = profiles.length === 0
+  const { profiles, screen, draft, showProfiles, openForm, selectProfile, setNickname, setAvatar, submitDraft, resetPreview } = useProfiles()
+  const heading = useFocusOnChange<HTMLHeadingElement>(screen.view)
   return <>
     <a className="skip-link" href="#main">Πήγαινε στο περιεχόμενο</a>
     <aside className="preview-bar" aria-label="Εργαλεία προεπισκόπησης">
@@ -53,27 +16,11 @@ export default function App() {
     </aside>
     <header className="site-header"><a className="brand" href="#main" onClick={showProfiles}><span className="brand-mark" aria-hidden="true"><svg width="26" height="30" viewBox="0 0 26 30"><path d="M15 1 3 17h9l-2 12 13-18h-9z" fill="currentColor" /></svg></span><span>Το Νησί των<br />Ανακαλύψεων</span></a><span className="header-note">Μικρές απορίες.<br />Μεγάλες ανακαλύψεις.</span></header>
     <main id="main" className="profile-layout">
-      <section className="welcome" aria-labelledby="welcome-title">
-        <div className="welcome-copy"><h1 id="welcome-title">{view === 'create' ? <>Η περιπέτεια<br /><span>ξεκινά εδώ.</span></> : view === 'selected' ? <>Έτοιμοι για<br /><span>ανακαλύψεις;</span></> : <>Ποιος εξερευνά<br /><span>σήμερα;</span></>}</h1><p>{view === 'create' ? 'Ένα ψευδώνυμο και μια εικόνα. Κάτι δικό σου, για κάθε ανακάλυψη.' : view === 'selected' ? 'Η Σπίθα σε περιμένει για την επόμενη ανακάλυψη.' : 'Είμαι η Σπίθα! Διάλεξε το προφίλ σου και έλα να εξερευνήσουμε μαζί.'}</p></div>
-        <img className="mascot" src="/assets/spitha.webp" alt="Η Σπίθα, το χαμογελαστό ρομπότ που μας καθοδηγεί" width="480" height="480" />
-      </section>
+      <WelcomePanel view={screen.view} />
       <section className="profile-panel" aria-labelledby="panel-title">
-        {view === 'choose' && <>
-          <h2 id="panel-title" className="panel-title" ref={heading} tabIndex={-1}>{isEmpty ? 'Το πρώτο σου προφίλ' : 'Διάλεξε το προφίλ σου'}</h2>
-          {isEmpty ? <div className="empty-state"><div className="empty-avatars"><Avatar index={0} /><Avatar index={2} /><Avatar index={5} /></div><h3>Κάθε εξερευνητής,<br />η δική του αρχή.</h3><p>Διάλεξε μια εικόνα από το νησί και ένα ψευδώνυμο που θα αναγνωρίζεις.</p><button className="button primary" onClick={openForm}>Δημιούργησε προφίλ <Icon kind="arrow" /></button></div> : <><div className="profile-grid">{profiles.map(profile => <button className="profile-choice" key={profile.id} onClick={() => selectProfile(profile)} aria-label={`${profile.name}, ${avatars[profile.avatar]}`}><Avatar index={profile.avatar} /><span className="profile-name">{profile.name}</span><span className="choice-arrow"><Icon kind="arrow" /></span></button>)}</div><button className="button new-profile" onClick={openForm}><Icon kind="plus" /> Νέο προφίλ</button></>}
-          <p className="privacy-note">Χωρίς email ή κωδικό. Ένα ψευδώνυμο αρκεί.</p>
-        </>}
-        {view === 'create' && <>
-          <button className="back-button" onClick={showProfiles}><Icon kind="back" /> Πίσω στα προφίλ</button>
-          <h2 id="panel-title" className="form-title" ref={heading} tabIndex={-1}>Φτιάξε το προφίλ σου</h2>
-          <form onSubmit={createProfile} noValidate>
-            <fieldset><legend>Διάλεξε την εικόνα σου</legend><div className="avatar-options">{avatarIndexes.map(index => { const label = avatars[index]; return <label key={label} className={`avatar-option ${avatar === index ? 'is-selected' : ''}`}><input type="radio" name="avatar" value={index} checked={avatar === index} onChange={() => setAvatar(index)} /><Avatar index={index} /><span>{label}</span><span className="selection-mark" aria-hidden="true">{avatar === index ? '✓' : ''}</span></label> })}</div></fieldset>
-            <div className="nickname-field"><label htmlFor="nickname">Το ψευδώνυμό σου</label><p id="nickname-help">Κάτι που θα θυμάσαι. Δεν χρειάζεται το αληθινό σου όνομα.</p><input ref={nicknameInput} id="nickname" name="nickname" value={nickname} onChange={event => { setNickname(event.target.value); setError('') }} maxLength={24} autoComplete="off" spellCheck="false" placeholder="π.χ. Αστερίας" aria-invalid={Boolean(error)} aria-describedby={`nickname-help nickname-count${error ? ' nickname-error' : ''}`} /><div className="field-bottom"><span id="nickname-error" className="field-error" role="alert">{error}</span><span id="nickname-count">{nickname.length}/24</span></div></div>
-            <button className="button primary form-submit" type="submit">Πάμε στο νησί <Icon kind="arrow" /></button>
-            <p className="privacy-note">Στην προεπισκόπηση, το προφίλ είναι προσωρινό.</p>
-          </form>
-        </>}
-        {screen.view === 'selected' && <div className="selected-state"><Avatar index={screen.profile.avatar} large /><h2 id="panel-title" ref={heading} tabIndex={-1}>Γεια σου, {screen.profile.name}!</h2><p>Το προφίλ σου επιλέχθηκε.</p><p className="preview-next">Η προεπισκόπηση τελειώνει εδώ.<br />Επόμενη οθόνη: ο χάρτης του νησιού.</p><button className="button primary" onClick={showProfiles}><Icon kind="back" /> Πίσω στα προφίλ</button></div>}
+        {screen.view === 'choose' && <ProfileChooser profiles={profiles} headingRef={heading} onSelect={selectProfile} onCreate={openForm} />}
+        {screen.view === 'create' && <ProfileForm draft={draft} headingRef={heading} onNicknameChange={setNickname} onAvatarChange={setAvatar} onSubmit={submitDraft} onBack={showProfiles} />}
+        {screen.view === 'selected' && <SelectedProfile profile={screen.profile} headingRef={heading} onBack={showProfiles} />}
       </section>
     </main>
     <footer className="site-footer"><span>Ένας ολόκληρος κόσμος για να τον ανακαλύψεις.</span><span>Με τη Σπίθα, βήμα βήμα.</span></footer>
