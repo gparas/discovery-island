@@ -15,6 +15,21 @@
     white-space: normal;
   }
 
+  /* Phones only: Σπίθα's prompt, which the scene's speech bubble carries on desktop. */
+  .map-prompt {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 16px;
+    font-size: 1.1875rem;
+    font-weight: 800;
+    line-height: 1.25;
+
+    & img { width: 56px; height: 56px; object-fit: contain; }
+
+    @media (max-width: 899px) { display: flex; }
+  }
+
   .archipelago-layout {
     display: grid;
     grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
@@ -65,15 +80,15 @@
   .topic-card:hover .topic-thumb, .topic-card.is-active .topic-thumb { transform: translateY(-3px) scale(1.04); }
   .topic-text { display: grid; gap: 2px; min-width: 0; }
   .topic-name {
-    font-size: 21px;
+    font-size: 1.3125rem;
     font-weight: 850;
     line-height: 1.2;
     letter-spacing: -0.02em;
     overflow-wrap: anywhere;
 
-    @media (max-width: 760px) { font-size: 19px; }
+    @media (max-width: 760px) { font-size: 1.1875rem; }
   }
-  .topic-progress { font-size: 14px; font-weight: 700; color: var(--color-teal-dark); }
+  .topic-progress { font-size: 0.875rem; font-weight: 700; color: var(--color-teal-dark); }
   .topic-chevron { display: flex; color: var(--color-teal-dark); }
 
   /* ── Island scene ─────────────────────────────────────────── */
@@ -108,7 +123,7 @@
     border-radius: 999px;
     background: var(--color-cream);
     color: var(--color-navy);
-    font-size: clamp(14px, 1.3vw, 18px);
+    font-size: clamp(0.875rem, 1.3vw, 1.125rem);
     font-weight: 850;
     box-shadow: 0 2px 8px rgb(22 50 79 / 0.18);
     transition: background-color 160ms ease-out, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -126,7 +141,7 @@
     padding: 10px 16px;
     border-radius: 24px 24px 24px 4px;
     background: var(--color-cream);
-    font-size: clamp(13px, 1.2vw, 18px);
+    font-size: clamp(0.8125rem, 1.2vw, 1.125rem);
     font-weight: 800;
     line-height: 1.25;
     pointer-events: none;

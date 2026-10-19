@@ -9,6 +9,9 @@ import { useCurrentProfile } from '../profiles/useProfiles.ts'
 import { paths } from '../routes/paths.ts'
 import type { Topic, TopicId } from '../types.ts'
 
+/** Phones show the scene as a banner below the list, so only there may it wait for scrolling; on desktop it is the main image. */
+const sceneLoading = typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 899px)').matches ? 'lazy' : undefined
+
 function topicProgress(topic: Topic, progress: MissionProgress) {
   return topic.missions.length ? `${completedCount(topic, progress)} από ${topic.missions.length} αποστολές` : 'Σύντομα'
 }
@@ -27,6 +30,7 @@ export function MapPage() {
   return <main id="main" className="archipelago-page">
     <h1 ref={heading} tabIndex={-1} className="sr-only">Πού θα εξερευνήσεις σήμερα;</h1>
     {resume && <Link className="button primary resume-link" to={paths.mission(resume.topicId, resume.id)}>Συνέχισε την αποστολή: {resume.title} <Icon kind="arrow" /></Link>}
+    <p className="map-prompt"><img src="/assets/spitha.webp" alt="" width="56" height="56" />Διάλεξε το νησί σου!</p>
     <div className="archipelago-layout">
       <ul className="topic-list" aria-label="Θέματα">
         {topics.map(topic => <li key={topic.id}>
@@ -44,7 +48,7 @@ export function MapPage() {
       <div className="archipelago-sea">
         <picture className="archipelago-scene">
           <source media="(max-width: 899px)" srcSet="/assets/map/scene-900.webp" />
-          <img src="/assets/map/scene-1625.webp" srcSet="/assets/map/scene-900.webp 900w, /assets/map/scene-1625.webp 1625w" sizes="(min-width: 1280px) 820px, 64vw" alt="" decoding="async" />
+          <img src="/assets/map/scene-1625.webp" srcSet="/assets/map/scene-900.webp 900w, /assets/map/scene-1625.webp 1625w" sizes="(min-width: 1280px) 820px, 64vw" alt="" loading={sceneLoading} decoding="async" />
         </picture>
         {/* Duplicates the list for pointer users only, so it stays out of the tab order and the accessibility tree. */}
         <div className="archipelago-islands" aria-hidden="true">
