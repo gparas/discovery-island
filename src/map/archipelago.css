@@ -75,10 +75,11 @@
     position: relative;
     z-index: 1;
     display: grid;
-    gap: 10px;
+    gap: 12px;
 
-    /* Desktop: the list fills its column, spreading the cards so the last one ends level with Σπίθα's panel. */
-    @media (min-width: 900px) { align-self: stretch; align-content: space-between; }
+    /* Desktop: the list sits at the foot of its column, so the last card ends level with Σπίθα's panel;
+       any spare height opens above it, under the title, never between the cards. */
+    @media (min-width: 900px) { align-self: end; }
     margin: 0;
     padding: 0;
     list-style: none;

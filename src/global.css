@@ -857,7 +857,7 @@
     overflow-wrap: anywhere;
   }
 
-  .topic-art {
+  .topic-art, .topic-art img {
     display: block;
     width: 100%;
     height: auto;
@@ -865,6 +865,29 @@
 
   .topic-page .back-button {
     margin: 0 0 8px;
+  }
+
+  /* Everything under the back link centres as one group in the height left above the footer. */
+  .topic-page {
+    display: flex;
+    flex-direction: column;
+
+    & > .back-button { align-self: flex-start; }
+    & > .back-button + * { margin-top: auto; }
+    & > :last-child { margin-bottom: auto; }
+  }
+
+  /* The art takes the full size of its source when nothing would fall off screen: always on a coming-soon
+     page, and on a topic with missions once the screen is tall enough to keep the path in view. */
+  .topic-page.is-soon {
+    @media (min-width: 761px) {
+      & > .topic-hero { grid-template-columns: minmax(0, 520px) minmax(0, 460px); }
+    }
+  }
+  .topic-page {
+    @media (min-width: 761px) and (min-height: 1000px) {
+      & > .topic-hero { grid-template-columns: minmax(0, 520px) minmax(0, 460px); }
+    }
   }
 
   /* Topic hero: the island art at full size beside the title and the selected mission (or «Σύντομα»).

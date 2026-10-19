@@ -31,9 +31,10 @@ function TopicMap({ topic }: { topic: Topic }) {
   const current = currentMission(topic, progress)
   const [selectedId, setSelectedId] = useState<MissionId | undefined>(current?.id)
   const selected = findMission(topic, selectedId) ?? current
-  return <main id="main" className={`topic-page topic-${topic.id}`}>
+  const soon = topic.missions.length === 0 || !selected
+  return <main id="main" className={`topic-page topic-${topic.id}${soon ? ' is-soon' : ''}`}>
     <BackLink className="back-button" to={paths.map}>Πίσω στον χάρτη</BackLink>
-    {topic.missions.length === 0 || !selected
+    {soon
       ? <section className="topic-hero">
           <h1 ref={heading} tabIndex={-1}>{topic.name}</h1>
           <TopicArt topicId={topic.id} />
