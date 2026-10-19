@@ -1,8 +1,8 @@
 ---
 version: 1
 slug: "src-app-tsx"
-primary_target: "src/App.tsx"
-related_targets: ["src/index.css"]
+primary_target: "src/layouts/WelcomeLayout.tsx"
+related_targets: ["src/components/ProfileChooser.tsx", "src/components/ProfileForm.tsx", "src/global.css"]
 ---
 
 # Profile selection

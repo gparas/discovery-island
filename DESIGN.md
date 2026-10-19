@@ -113,7 +113,7 @@ components:
 
 The existing island identity pairs warm cream surfaces and navy Greek text with teal controls, yellow accents and original illustrated artwork. Preserve the name, bundled Noto Sans, the original island and Σπίθα artwork, and the cream/teal/navy/coral/yellow palette established in PRODUCT.md.
 
-This is a scan of the implemented profile design preview in src/App.tsx and src/index.css, not a specification for completed missions or production profile persistence. The welcome-and-choice composition belongs to this surface; future screens inherit the identity, not its grid.
+This is a scan of the implemented profile design preview in src/layouts/WelcomeLayout.tsx, its profile components and src/global.css, not a specification for completed missions or production profile persistence. The welcome-and-choice composition belongs to this surface; future screens inherit the identity, not its grid.
 
 **Key Characteristics:**
 - Warm, light surfaces with readable Greek typography.

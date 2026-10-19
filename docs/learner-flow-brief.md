@@ -20,7 +20,7 @@ Greek-speaking children aged 8–12, playing at home or on shared classroom devi
 
 ### 1. Profile selection
 
-Selected screen composition: **Welcome + profile grid**, confirmed by the project owner. On desktop, place Σπίθα and the welcome beside a grid of large avatar-and-nickname buttons. On phones, condense the welcome above the grid. Selecting a profile enters directly, without a separate confirmation button. The approved composition is recorded above and implemented in `src/App.tsx` and `src/index.css`. Its local-only reference sketch is `.impeccable/mocks/decision/welcome-grid.html` (gitignored; not available in a fresh clone); its fictional names and schematic avatars are preview content, not seeded user data or final illustration assets.
+Selected screen composition: **Welcome + profile grid**, confirmed by the project owner. On desktop, place Σπίθα and the welcome beside a grid of large avatar-and-nickname buttons. On phones, condense the welcome above the grid. Selecting a profile enters directly, without a separate confirmation button. The approved composition is recorded above and implemented in `src/layouts/WelcomeLayout.tsx`, `src/components/` and `src/global.css`. Its local-only reference sketch is `.impeccable/mocks/decision/welcome-grid.html` (gitignored; not available in a fresh clone); its fictional names and schematic avatars are preview content, not seeded user data or final illustration assets.
 
 Lead with «Ποιος εξερευνά σήμερα;», recognizable avatar-and-nickname choices, and «Νέο προφίλ». Keep Σπίθα as a welcoming supporting illustration.
 
