@@ -36,6 +36,15 @@
   --color-placeholder: #64747d;
   --color-error: #a1372b;
   --color-sand: #f0efe5;
+  --color-hint: #fff4d6;
+
+  /* Circuit artwork, from the original game */
+  --color-steel: #a6b4b9;
+  --color-glass: #e5f0ef;
+  --color-bulb-rim: #c98a12;
+  --color-contact: #ffd985;
+  --color-contact-edge: #99712f;
+  --color-board-dot: #dcd8ca;
 
   /* Design-preview bar */
   --color-preview: #e5efea;
@@ -767,6 +776,13 @@
       font-size: 14px;
     }
 
+    & .back-to-profiles {
+      display: flex;
+      width: fit-content;
+      margin: 12px auto 0;
+      color: var(--color-teal-dark);
+    }
+
     @media (max-width: 760px) {
       padding-top: 10px;
 
@@ -827,5 +843,563 @@
     margin-top: 32px;
     color: var(--color-teal-dark);
     font-weight: 750;
+  }
+
+  /* ── Shared secondary controls ───────────────────────────── */
+
+  .button.secondary {
+    background: var(--color-paper);
+    color: var(--color-teal-dark);
+    border: 1px solid var(--color-outline-soft);
+
+    &:hover:not(:disabled) {
+      background: var(--color-seafoam);
+    }
+  }
+
+  .button:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+
+  .text-button {
+    align-self: center;
+    min-height: 44px;
+    padding: 8px 4px;
+    color: var(--color-teal-dark);
+    font-size: 15px;
+    font-weight: 750;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+
+    &:disabled {
+      color: var(--color-muted);
+      text-decoration: none;
+      opacity: 0.6;
+      cursor: default;
+    }
+  }
+
+  /* ── Mission shell ───────────────────────────────────────── */
+
+  .mission-shell {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  .mission-bar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 32px;
+    border-bottom: 1px solid var(--color-line);
+
+    & .back-button {
+      margin-top: 0;
+      justify-self: start;
+    }
+
+    & .mission-profile {
+      justify-self: end;
+      font-size: 15px;
+    }
+
+    @media (max-width: 760px) {
+      grid-template-columns: 1fr auto;
+      padding: 10px 16px;
+      row-gap: 6px;
+
+      & .stage-indicator {
+        grid-row: 2;
+        grid-column: 1 / -1;
+        justify-self: center;
+      }
+    }
+  }
+
+  .mission-profile .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .stage-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 650;
+    color: var(--color-muted);
+
+    & li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    & li + li::before {
+      content: "";
+      width: 20px;
+      height: 2px;
+      background: var(--color-line);
+      margin-right: 2px;
+    }
+
+    & .is-current {
+      color: var(--color-teal-dark);
+      font-weight: 800;
+    }
+
+    @media (max-width: 760px) {
+      gap: 6px;
+
+      & li + li::before {
+        width: 10px;
+      }
+
+      & li:not(.is-current) .stage-label {
+        clip-path: inset(50%);
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .stage-number {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-sand);
+    font-variant-numeric: tabular-nums;
+
+    .is-current & {
+      background: var(--color-teal);
+      color: white;
+      box-shadow: 0 0 0 4px var(--color-seafoam);
+    }
+
+    .is-done & {
+      background: var(--color-seafoam);
+      color: var(--color-teal-dark);
+    }
+  }
+
+  .mission-main {
+    padding: 32px 32px 48px;
+
+    @media (max-width: 760px) {
+      padding: 20px 16px 36px;
+    }
+  }
+
+  .mission-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+
+    & .mission-topic {
+      margin: 0 0 4px;
+      font-size: 14px;
+    }
+
+    & h1 {
+      font-size: 34px;
+      font-weight: 850;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+
+      &:focus {
+        outline: none;
+      }
+
+      @media (max-width: 760px) {
+        font-size: 27px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+  }
+
+  .mission-instruction {
+    margin-top: 6px;
+    color: var(--color-muted);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .mission-note {
+    flex-shrink: 0;
+    border: 1px solid var(--color-line);
+    background: var(--color-paper);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: var(--color-muted);
+  }
+
+  .mission-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    grid-template-areas:
+      "board panel"
+      "tip panel";
+    grid-template-rows: auto 1fr;
+    gap: 20px 28px;
+    align-items: start;
+
+    &.is-solo {
+      grid-template-columns: minmax(0, 520px);
+      grid-template-areas: "panel";
+      justify-content: center;
+    }
+
+    @media (max-width: 1100px) {
+      grid-template-columns: minmax(0, 1fr) 300px;
+    }
+
+    @media (max-width: 760px) {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "board" "tip" "panel";
+      gap: 16px;
+    }
+  }
+
+  .mission-board {
+    grid-area: board;
+  }
+
+  .spitha-tip {
+    grid-area: tip;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    border-radius: var(--radius-card);
+    background: var(--color-seafoam);
+
+    &:empty {
+      padding: 0;
+      background: none;
+    }
+
+    & .spitha {
+      width: 60px;
+      flex-shrink: 0;
+    }
+  }
+
+  .tip-name {
+    color: var(--color-teal-dark);
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  .tip-text {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .loop-text {
+    margin-top: 6px;
+    font-weight: 750;
+  }
+
+  .mission-panel {
+    grid-area: panel;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .panel-heading {
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+  }
+
+  .panel-guide {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+
+    & .spitha {
+      width: 92px;
+      flex-shrink: 0;
+    }
+  }
+
+  .panel-speech {
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  .panel-action {
+    width: 100%;
+  }
+
+  .choice-group {
+    display: grid;
+    gap: 12px;
+
+    &.is-row {
+      grid-template-columns: 1fr 1fr;
+
+      /* An odd last choice, such as «Δεν είμαι σίγουρος/η», takes the full row instead of wrapping. */
+      & .choice:last-of-type:nth-of-type(odd) {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+
+  .choice {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+    padding: 12px 16px;
+    border: 2px solid var(--color-line);
+    border-radius: 14px;
+    background: var(--color-paper);
+    box-shadow: 0 3px 0 var(--color-line);
+    cursor: pointer;
+    line-height: 1.45;
+    font-size: 15px;
+    font-weight: 650;
+
+    .is-row & {
+      justify-content: center;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    &:hover {
+      border-color: var(--color-outline-soft);
+    }
+
+    &.is-selected {
+      border-color: var(--color-teal);
+      background: var(--color-seafoam);
+      box-shadow: 0 3px 0 var(--color-teal-dark);
+    }
+
+    & input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+
+    &:has(input:focus-visible) {
+      outline: 3px solid var(--color-teal-dark);
+      outline-offset: 3px;
+    }
+
+    :disabled > & {
+      cursor: default;
+
+      &:not(.is-selected) {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  .board-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tool-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .hint {
+    background: var(--color-hint);
+    border-radius: var(--radius-control);
+    padding: 14px 16px;
+    font-size: 15px;
+    line-height: 1.6;
+
+    & .button {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+
+  /* ── Circuit board ───────────────────────────────────────── */
+
+  .circuit-board {
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  /* The original game's dotted workbench, behind the artwork only. */
+  .circuit-stage {
+    position: relative;
+    background-image: radial-gradient(var(--color-board-dot) 1.2px, transparent 1.2px);
+    background-size: 28px 28px;
+    background-position: 14px 14px;
+  }
+
+  .circuit-art {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 720 / 410;
+  }
+
+  .circuit-sign {
+    font-size: 40px;
+    font-weight: 800;
+    text-anchor: middle;
+
+    &.mystery {
+      font-size: 32px;
+      fill: var(--color-muted);
+    }
+  }
+
+  .circuit-label {
+    font-size: 13px;
+    font-weight: 750;
+    text-anchor: middle;
+  }
+
+  .wire {
+    fill: none;
+    stroke-width: 9;
+    stroke-linecap: round;
+  }
+
+  .wire-first {
+    stroke: var(--color-coral);
+  }
+
+  .wire-second {
+    stroke: var(--color-teal);
+  }
+
+  .wire-shadow {
+    fill: none;
+    stroke: var(--color-navy);
+    stroke-width: 13;
+    opacity: 0.12;
+    transform: translateY(3px);
+  }
+
+  .wire-trace {
+    fill: none;
+    stroke: var(--color-yellow);
+    stroke-width: 24;
+    stroke-linecap: round;
+    opacity: 0.7;
+  }
+
+  .terminal {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    touch-action: manipulation;
+
+    & > span {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--color-contact);
+      border: 2px solid var(--color-paper);
+      box-shadow: 0 2px 0 var(--color-contact-edge), 0 0 0 2px var(--color-contact-edge);
+    }
+
+    &:not(.is-static):hover > span {
+      box-shadow: 0 0 0 6px var(--color-seafoam-pressed), 0 2px 0 var(--color-contact-edge);
+    }
+
+    &.is-pending {
+      background: var(--color-seafoam);
+      outline: 3px solid var(--color-teal);
+      outline-offset: -2px;
+    }
+
+    &.is-hinted {
+      outline: 3px dashed var(--color-teal-dark);
+      outline-offset: -2px;
+      animation: terminal-pulse 1.6s ease-in-out infinite;
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+
+    &.is-static {
+      pointer-events: none;
+    }
+
+    @media (max-width: 760px) {
+      width: 44px;
+      height: 44px;
+
+      & > span {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  .circuit-caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 12px 20px;
+    border-top: 1px solid var(--color-line);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-muted);
+
+    & strong {
+      flex-shrink: 0;
+      color: var(--color-navy);
+      text-align: right;
+
+      .is-lit & {
+        color: var(--color-teal-dark);
+      }
+    }
+
+    @media (max-width: 760px) {
+      flex-direction: column;
+      gap: 2px;
+      padding: 10px 14px;
+
+      & strong {
+        text-align: left;
+      }
+    }
+  }
+}
+
+@keyframes terminal-pulse {
+  50% {
+    background: var(--color-seafoam-pressed);
   }
 }

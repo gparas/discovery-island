@@ -1,17 +1,21 @@
-import { Link, Outlet, useNavigate } from 'react-router'
+import { Outlet, useNavigate } from 'react-router'
+import { LessonProgressProvider } from '../lessons/LessonProgressProvider.tsx'
+import { useLessonProgress } from '../lessons/useLessonProgress.ts'
 import { ProfilesProvider } from '../profiles/ProfilesProvider.tsx'
 import { useProfiles } from '../profiles/useProfiles.ts'
 import { paths } from '../routes/paths.ts'
 
 export function RootLayout() {
-  return <ProfilesProvider><SiteChrome /></ProfilesProvider>
+  return <ProfilesProvider><LessonProgressProvider><PreviewChrome /></LessonProgressProvider></ProfilesProvider>
 }
 
-function SiteChrome() {
+function PreviewChrome() {
   const { resetPreview } = useProfiles()
+  const { clearProgress } = useLessonProgress()
   const navigate = useNavigate()
   function reset(empty: boolean) {
     resetPreview(empty)
+    clearProgress()
     void navigate(paths.chooseProfile)
   }
   return <>
@@ -20,8 +24,6 @@ function SiteChrome() {
       <span><strong>Προεπισκόπηση σχεδίου</strong><span className="preview-description"> · Δοκιμαστικά προφίλ, χωρίς αποθήκευση</span></span>
       <div><button type="button" onClick={() => reset(false)}>Με προφίλ</button><button type="button" onClick={() => reset(true)}>Πρώτη επίσκεψη</button></div>
     </aside>
-    <header className="site-header"><Link className="brand" to={paths.chooseProfile}><span className="brand-mark" aria-hidden="true"><svg width="26" height="30" viewBox="0 0 26 30"><path d="M15 1 3 17h9l-2 12 13-18h-9z" fill="currentColor" /></svg></span><span>Το Νησί των<br />Ανακαλύψεων</span></Link><span className="header-note">Μικρές απορίες.<br />Μεγάλες ανακαλύψεις.</span></header>
     <Outlet />
-    <footer className="site-footer"><span>Ένας ολόκληρος κόσμος για να τον ανακαλύψεις.</span><span>Με τη Σπίθα, βήμα βήμα.</span></footer>
   </>
 }

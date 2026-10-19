@@ -174,22 +174,31 @@ describe('profile-only routes', () => {
     expect(panelHeading()).toHaveTextContent('Διάλεξε το προφίλ σου')
   })
 
-  it('shows a mission placeholder for the current profile and returns to the island', async () => {
+  it('shows a placeholder for an unfinished mission and returns to the island', async () => {
     const { user, navigate, path } = setup()
     await user.click(screen.getByRole('button', { name: 'Νίκος, Φάρος' }))
-    await navigate(paths.mission('electricity'))
+    await navigate(paths.mission('light'))
 
-    expect(path()).toBe('/island/missions/electricity')
+    expect(path()).toBe('/island/missions/light')
     const title = screen.getByRole('heading', { level: 1 })
-    expect(title).toHaveTextContent('Άναψε τη λάμπα')
+    expect(title).toHaveTextContent('Φως')
     expect(title).toHaveFocus()
-    expect(screen.getByText('Ηλεκτρισμός')).toBeInTheDocument()
     expect(screen.getByText('Νίκος')).toBeInTheDocument()
     expect(screen.getByText('Αυτή η αποστολή δεν είναι ακόμη έτοιμη.')).toBeInTheDocument()
 
     await user.click(screen.getByRole('link', { name: 'Πίσω στο νησί' }))
     expect(path()).toBe('/island')
     expect(panelHeading()).toHaveTextContent('Γεια σου, Νίκος!')
+  })
+
+  it('opens the electricity lesson from the island', async () => {
+    const { user, path } = setup()
+    await user.click(screen.getByRole('button', { name: 'Νίκος, Φάρος' }))
+    await user.click(screen.getByRole('link', { name: 'Άναψε τη λάμπα' }))
+
+    expect(path()).toBe('/island/missions/electricity')
+    expect(screen.getByRole('heading', { level: 1 })).toHaveFocus()
+    expect(screen.getByRole('button', { name: 'Ας εξερευνήσουμε!' })).toBeInTheDocument()
   })
 
   it('redirects an unknown mission to the island', async () => {
