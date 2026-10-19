@@ -43,6 +43,8 @@
 
   .topic-list {
     grid-area: list;
+    position: relative;
+    z-index: 1;
     display: grid;
     gap: 12px;
     margin: 0;
@@ -108,24 +110,28 @@
 
   /* ── Island scene ─────────────────────────────────────────── */
 
-  /* Scene and hotspots share one coordinate system; never crop with cover on desktop.
-     The sea feathers into the page so the island reads as a place, not a framed picture. */
+  /* Island and hotspots share one coordinate system (the 3:2 artwork); never crop it.
+     The artwork carries its own cloud edge on a transparent ground, so it sits straight on the page. */
   .archipelago-sea {
     grid-area: map;
     position: relative;
     isolation: isolate;
-    aspect-ratio: 1625 / 968;
+    aspect-ratio: 3 / 2;
+
+    /* Desktop: the island outgrows its cell, reaching left under the list's edge and down under
+       Σπίθα's panel, and a little into the right gutter; its soft cloud rim lets both sit on top of it.
+       Percentages are of the cell's width. */
+    @media (min-width: 900px) {
+      width: 108%;
+      margin: 0 -4% -10% -4%;
+    }
+    @media (min-width: 1200px) {
+      width: 118%;
+      margin: 0 -6% -12% -12%;
+    }
   }
   .archipelago-scene, .archipelago-scene img { display: block; width: 100%; height: 100%; }
-  .archipelago-scene {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    mask-image:
-      linear-gradient(to right, transparent, #000 6%, #000 94%, transparent),
-      linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
-    mask-composite: intersect;
-  }
+  .archipelago-scene { position: absolute; inset: 0; pointer-events: none; }
   .archipelago-islands { position: absolute; inset: 0; }
   .island-link {
     position: absolute;
@@ -135,11 +141,12 @@
     padding-bottom: 2%;
     text-decoration: none;
   }
-  .destination-electricity { left: 1%; top: 10%; width: 32%; height: 43%; }
-  .destination-light { left: 35%; top: 0%; width: 30%; height: 41%; }
-  .destination-heat { left: 68%; top: 5%; width: 31%; height: 45%; }
-  .destination-sound { left: 34%; top: 43%; width: 31%; height: 41%; }
-  .destination-forces { left: 66%; top: 51%; width: 33%; height: 45%; }
+  /* Boxes frame each landmark in the island artwork; the label sits at the box's foot. */
+  .destination-electricity { left: 25%; top: 12%; width: 12%; height: 19%; }
+  .destination-light { left: 60%; top: 6%; width: 10%; height: 26%; }
+  .destination-heat { left: 15%; top: 42%; width: 18%; height: 21%; }
+  .destination-sound { left: 54%; top: 54%; width: 18%; height: 23%; }
+  .destination-forces { left: 76%; top: 34%; width: 17%; height: 23%; }
   .island-caption {
     position: relative;
     padding: 6px 16px;
@@ -169,6 +176,8 @@
 
   .spitha-panel {
     grid-area: panel;
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: 112px minmax(0, 1fr) auto;
     align-items: center;
@@ -206,16 +215,8 @@
     @media (max-width: 899px) { margin: 0; }
   }
 
-  /* Phones and narrow tablets: the list is the map; the scene becomes a decorative banner. */
+  /* Phones and narrow tablets: the list is the map; the island follows it as decoration. */
   @media (max-width: 899px) {
-    .archipelago-sea {
-      aspect-ratio: 16 / 7;
-      overflow: hidden;
-      border-radius: var(--radius-card);
-      background: var(--color-sea);
-    }
-    .archipelago-scene { mask-image: none; }
-    .archipelago-scene img { object-fit: cover; object-position: 50% 40%; }
     .archipelago-islands { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {

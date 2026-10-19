@@ -9,7 +9,7 @@ import { useCurrentProfile } from '../profiles/useProfiles.ts'
 import { paths } from '../routes/paths.ts'
 import type { Topic, TopicId } from '../types.ts'
 
-/** Phones show the scene as a banner below the list, so only there may it wait for scrolling; on desktop it is the main image. */
+/** Phones show the island below the list, so only there may it wait for scrolling; on desktop it is the main image. */
 const sceneLoading = typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 899px)').matches ? 'lazy' : undefined
 
 function topicProgress(topic: Topic, progress: MissionProgress) {
@@ -55,8 +55,10 @@ export function MapPage() {
       </ul>
       <div className="archipelago-sea">
         <picture className="archipelago-scene">
-          <source media="(max-width: 899px)" srcSet="/assets/map/scene-900.webp" />
-          <img src="/assets/map/scene-1625.webp" srcSet="/assets/map/scene-900.webp 900w, /assets/map/scene-1625.webp 1625w" sizes="(min-width: 1280px) 760px, 60vw" alt="" loading={sceneLoading} decoding="async" />
+          {/* Phones always get the small file, whatever their pixel density. */}
+          <source media="(max-width: 899px)" srcSet="/assets/map/island-800.webp" />
+          <img src="/assets/map/island-1536.webp" srcSet="/assets/map/island-800.webp 800w, /assets/map/island-1536.webp 1536w"
+            sizes="(min-width: 1280px) 892px, 70vw" width="1536" height="1024" alt="" loading={sceneLoading} decoding="async" />
         </picture>
         {/* Duplicates the list for pointer users only, so it stays out of the tab order and the accessibility tree. */}
         <div className="archipelago-islands" aria-hidden="true">
