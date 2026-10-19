@@ -37,8 +37,8 @@ export function MapPage() {
   // The last topic pointed at or focused stays selected, so the panel's action still matches it when reached.
   const highlight = (id: TopicId) => ({ onPointerEnter: () => setSelected(id) })
   return <main id="main" className="archipelago-page">
-    <h1 ref={heading} tabIndex={-1} className="sr-only">Πού θα εξερευνήσεις σήμερα;</h1>
     <div className="basecamp">
+      <h1 ref={heading} tabIndex={-1} className="basecamp-title">Πού θα εξερευνήσεις σήμερα;</h1>
       {!resume && <p className="map-prompt"><img src="/assets/spitha.webp" alt="" width="56" height="51" />Διάλεξε το νησί σου!</p>}
       <ul className="topic-list" aria-label="Θέματα">
         {topics.map(topic => <li key={topic.id}>
@@ -53,19 +53,21 @@ export function MapPage() {
           </Link>
         </li>)}
       </ul>
-      <div className="archipelago-sea">
-        <picture className="archipelago-scene">
-          {/* Phones always get the small file, whatever their pixel density. */}
-          <source media="(max-width: 899px)" srcSet="/assets/map/island-800.webp" />
-          <img src="/assets/map/island-1536.webp" srcSet="/assets/map/island-800.webp 800w, /assets/map/island-1536.webp 1536w"
-            sizes="(min-width: 1280px) 892px, 70vw" width="1536" height="1024" alt="" loading={sceneLoading} decoding="async" />
-        </picture>
-        {/* Duplicates the list for pointer users only, so it stays out of the tab order and the accessibility tree. */}
-        <div className="archipelago-islands" aria-hidden="true">
-          {topics.map(topic => <Link key={topic.id} tabIndex={-1} to={paths.topic(topic.id)} {...highlight(topic.id)}
-            className={`island-link destination-${topic.id}${featured.id === topic.id ? ' is-active' : ''}`}>
-            <span className="island-caption">{featured.id === topic.id && <MapPin />}{topic.name}</span>
-          </Link>)}
+      <div className="archipelago-stage">
+        <div className="archipelago-sea">
+          <picture className="archipelago-scene">
+            {/* Phones always get the small file, whatever their pixel density. */}
+            <source media="(max-width: 899px)" srcSet="/assets/map/island-800.webp" />
+            <img src="/assets/map/island-1536.webp" srcSet="/assets/map/island-800.webp 800w, /assets/map/island-1536.webp 1536w"
+              sizes="(min-width: 1280px) 892px, 70vw" width="1536" height="1024" alt="" loading={sceneLoading} decoding="async" />
+          </picture>
+          {/* Duplicates the list for pointer users only, so it stays out of the tab order and the accessibility tree. */}
+          <div className="archipelago-islands" aria-hidden="true">
+            {topics.map(topic => <Link key={topic.id} tabIndex={-1} to={paths.topic(topic.id)} {...highlight(topic.id)}
+              className={`island-link destination-${topic.id}${featured.id === topic.id ? ' is-active' : ''}`}>
+              {featured.id === topic.id && <MapPin />}<span className="island-caption">{topic.name}</span>
+            </Link>)}
+          </div>
         </div>
       </div>
       <section className={`spitha-panel${resume ? ' is-resume' : ''}`} aria-labelledby="spitha-panel-title">

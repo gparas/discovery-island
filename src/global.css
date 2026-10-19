@@ -82,6 +82,16 @@
     min-width: 320px;
   }
 
+  /* The page fills the screen, so a short page keeps its footer at the bottom edge. */
+  #root {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+
+    /* width: in a flex column, auto side margins would otherwise shrink a centred main to its content. */
+    & > main { flex: 1 0 auto; width: 100%; }
+  }
+
   button,
   a,
   input,
