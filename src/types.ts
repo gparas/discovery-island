@@ -7,19 +7,25 @@ export interface Profile {
   readonly avatar: AvatarIndex
 }
 
-/** The profile panel shows exactly one of these screens; only `selected` carries a profile. */
-export type Screen =
-  | { readonly view: 'choose' }
-  | { readonly view: 'create' }
-  | { readonly view: 'selected'; readonly profile: Profile }
-
-export type ScreenView = Screen['view']
+/** Which welcome copy accompanies the profile panel. */
+export type WelcomeView = 'choose' | 'create' | 'selected'
 
 export type IconKind = 'plus' | 'back' | 'arrow'
 
-/** The in-progress values of the profile creation form. */
+/** The in-progress values of the profile creation form, kept while the learner leaves and returns to it. */
 export interface ProfileDraft {
   readonly nickname: string
   readonly avatar: AvatarIndex
-  readonly error: string
+}
+
+export type DraftResult =
+  | { readonly ok: true; readonly profile: Profile }
+  | { readonly ok: false; readonly error: string }
+
+export type MissionId = 'electricity' | 'light' | 'heat' | 'sound' | 'forces'
+
+export interface Mission {
+  readonly id: MissionId
+  readonly topic: string
+  readonly title: string
 }
