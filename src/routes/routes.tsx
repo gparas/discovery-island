@@ -28,7 +28,7 @@ export const routes: RouteObject[] = [
         element: <RequireProfile />,
         children: [
           {
-            element: <SiteLayout />,
+            element: <SiteLayout explorer />,
             children: [
               { path: paths.map, element: <MapPage /> },
               { path: paths.topicPattern, element: <TopicPage /> },

@@ -1,0 +1,146 @@
+@layer components {
+  /* Same measure as .site-header so the brand, list and scene share one edge. */
+  .archipelago-page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 28px 48px 40px;
+
+    @media (max-width: 760px) { padding: 20px 24px 32px; }
+  }
+  .archipelago-page > .resume-link {
+    display: flex;
+    width: fit-content;
+    max-width: 100%;
+    margin-bottom: 20px;
+    white-space: normal;
+  }
+
+  .archipelago-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+
+    @media (max-width: 899px) { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  }
+
+  /* ── Topic list: the navigation ───────────────────────────── */
+
+  .topic-list {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @media (min-width: 560px) and (max-width: 899px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  .topic-card {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    min-height: 88px;
+    padding: 6px 16px 6px 8px;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    background: var(--color-paper);
+    color: var(--color-navy);
+    text-decoration: none;
+    transition: background-color 160ms ease-out, border-color 160ms ease-out;
+
+    &:hover, &.is-active { background: var(--color-seafoam); border-color: var(--color-outline-soft); }
+    &:active { background: var(--color-seafoam-pressed); }
+    &:focus-visible { outline: 3px solid var(--color-navy); outline-offset: 2px; }
+
+    @media (max-width: 760px) { grid-template-columns: 72px minmax(0, 1fr) auto; min-height: 76px; gap: 12px; }
+  }
+  .topic-thumb {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 104 / 88;
+    object-fit: contain;
+    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .topic-card:hover .topic-thumb, .topic-card.is-active .topic-thumb { transform: translateY(-3px) scale(1.04); }
+  .topic-text { display: grid; gap: 2px; min-width: 0; }
+  .topic-name {
+    font-size: 21px;
+    font-weight: 850;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+
+    @media (max-width: 760px) { font-size: 19px; }
+  }
+  .topic-progress { font-size: 14px; font-weight: 700; color: var(--color-teal-dark); }
+  .topic-chevron { display: flex; color: var(--color-teal-dark); }
+
+  /* ── Island scene ─────────────────────────────────────────── */
+
+  /* Scene and hotspots share one coordinate system; never crop with cover on desktop. */
+  .archipelago-sea {
+    position: relative;
+    isolation: isolate;
+    aspect-ratio: 1625 / 968;
+    overflow: hidden;
+    border-radius: 24px;
+    background: var(--color-sea);
+  }
+  .archipelago-scene, .archipelago-scene img { display: block; width: 100%; height: 100%; }
+  .archipelago-scene { position: absolute; inset: 0; pointer-events: none; }
+  .archipelago-islands { position: absolute; inset: 0; }
+  .island-link {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 2%;
+    text-decoration: none;
+  }
+  .destination-electricity { left: 1%; top: 10%; width: 32%; height: 43%; }
+  .destination-light { left: 35%; top: 0%; width: 30%; height: 41%; }
+  .destination-heat { left: 68%; top: 5%; width: 31%; height: 45%; }
+  .destination-sound { left: 34%; top: 43%; width: 31%; height: 41%; }
+  .destination-forces { left: 66%; top: 51%; width: 33%; height: 45%; }
+  .island-caption {
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: var(--color-cream);
+    color: var(--color-navy);
+    font-size: clamp(14px, 1.3vw, 18px);
+    font-weight: 850;
+    box-shadow: 0 2px 8px rgb(22 50 79 / 0.18);
+    transition: background-color 160ms ease-out, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .island-link:hover .island-caption, .island-link.is-active .island-caption {
+    background: var(--color-yellow);
+    transform: translateY(-3px);
+  }
+  .map-guide {
+    position: absolute;
+    top: 74%;
+    left: 17%;
+    max-width: 20%;
+    margin: 0;
+    padding: 10px 16px;
+    border-radius: 24px 24px 24px 4px;
+    background: var(--color-cream);
+    font-size: clamp(13px, 1.2vw, 18px);
+    font-weight: 800;
+    line-height: 1.25;
+    pointer-events: none;
+  }
+
+  /* Phones and narrow tablets: the list is the map; the scene becomes a decorative banner. */
+  @media (max-width: 899px) {
+    .archipelago-sea { aspect-ratio: 16 / 7; border-radius: var(--radius-card); }
+    .archipelago-scene img { object-fit: cover; object-position: 50% 40%; }
+    .archipelago-islands, .map-guide { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .topic-card, .topic-thumb, .island-caption { transition: none; }
+    .topic-card:hover .topic-thumb, .topic-card.is-active .topic-thumb,
+    .island-link:hover .island-caption, .island-link.is-active .island-caption { transform: none; }
+  }
+}

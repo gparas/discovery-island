@@ -192,10 +192,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
     border-bottom: 1px solid var(--color-line);
 
     @media (max-width: 760px) {
       padding: 22px 24px;
+    }
+
+    & .explorer-badge {
+      min-width: 0;
+      justify-content: flex-end;
+
+      @media (max-width: 760px) {
+        flex-wrap: wrap;
+        gap: 0 8px;
+        font-size: 14px;
+        text-align: right;
+
+        & .avatar { width: 38px; height: 38px; }
+        & .explorer-name { max-width: 9em; }
+      }
     }
   }
 
@@ -853,89 +869,6 @@
     margin-bottom: 28px;
   }
 
-  .islets {
-    display: flex;
-    flex-direction: column;
-    gap: 44px;
-    padding: 32px 24px;
-    border-radius: 28px;
-    background: var(--color-sea);
-    background-image: radial-gradient(var(--color-sea-dot) 1.5px, transparent 1.5px);
-    background-size: 30px 30px;
-
-    @media (max-width: 760px) {
-      gap: 36px;
-      padding: 24px 12px;
-    }
-  }
-
-  /* Islets zigzag down the sea; the stones between them are decoration, not an order. */
-  .islet-item {
-    position: relative;
-    width: min(260px, 70%);
-    align-self: flex-start;
-    margin-left: 8%;
-
-    &:nth-child(even) {
-      align-self: flex-end;
-      margin: 0 8% 0 0;
-    }
-
-    /* Three stepping stones heading towards the next islet. */
-    &:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      left: 62%;
-      top: calc(100% - 6px);
-      width: 96px;
-      height: 56px;
-      background:
-        radial-gradient(ellipse 9px 6px, var(--color-stone) 98%, transparent) 10px 4px / 20px 14px no-repeat,
-        radial-gradient(ellipse 9px 6px, var(--color-stone) 98%, transparent) 40px 20px / 20px 14px no-repeat,
-        radial-gradient(ellipse 9px 6px, var(--color-stone) 98%, transparent) 70px 36px / 20px 14px no-repeat;
-      pointer-events: none;
-    }
-
-    &:nth-child(even):not(:last-child)::after {
-      left: auto;
-      right: 62%;
-      transform: scaleX(-1);
-    }
-
-    @media (max-width: 760px) {
-      width: min(240px, 78%);
-      margin-left: 2%;
-
-      &:nth-child(even) {
-        margin-right: 2%;
-      }
-    }
-  }
-
-  .islet {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    padding: 8px;
-    border-radius: var(--radius-card);
-    text-decoration: none;
-    text-align: center;
-    transition: transform 0.16s;
-
-    &:hover {
-      transform: translateY(-3px);
-    }
-
-    &:focus-visible {
-      outline-color: var(--color-paper);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
-    }
-  }
-
   .islet-art {
     width: 100%;
     height: auto;
@@ -964,24 +897,6 @@
 
     &.is-dark {
       filter: brightness(0.74);
-    }
-  }
-
-  .islet-name {
-    padding: 4px 14px;
-    border-radius: 999px;
-    background: var(--color-paper);
-    font-size: 18px;
-    font-weight: 850;
-  }
-
-  .islet-status {
-    color: var(--color-paper);
-    font-size: 14px;
-    font-weight: 700;
-
-    &.is-soon {
-      opacity: 0.85;
     }
   }
 

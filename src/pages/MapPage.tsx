@@ -1,41 +1,60 @@
+import { useState } from 'react'
 import { Link } from 'react-router'
-import { ExplorerBadge } from '../components/ExplorerBadge.tsx'
 import { Icon } from '../components/Icon.tsx'
 import { useFocusOnNavigation } from '../hooks/useFocusOnNavigation.ts'
-import { Islet } from '../map/Islet.tsx'
+import '../map/archipelago.css'
 import { completedCount, topics, type MissionProgress } from '../map/topics.ts'
 import { useMissionProgress } from '../map/useMissionProgress.ts'
 import { useCurrentProfile } from '../profiles/useProfiles.ts'
 import { paths } from '../routes/paths.ts'
-import type { Topic } from '../types.ts'
+import type { Topic, TopicId } from '../types.ts'
 
 function topicProgress(topic: Topic, progress: MissionProgress) {
   return topic.missions.length ? `${completedCount(topic, progress)} από ${topic.missions.length} αποστολές` : 'Σύντομα'
 }
 
-/** Placeholder map: five open topic islets joined by decorative stones, top to bottom. */
+/**
+ * Five independently accessible topics: the list is the navigation, the island scene beside it is a
+ * pointer shortcut that mirrors the list's hover and focus. Phones get the list and a small scene banner.
+ */
 export function MapPage() {
   const profile = useCurrentProfile()
   const progress = useMissionProgress(profile.id)
   const heading = useFocusOnNavigation<HTMLHeadingElement>()
+  const [active, setActive] = useState<TopicId | null>(null)
   const resume = topics.flatMap(topic => topic.missions).find(mission => progress.inProgress.has(mission.id))
-  return <main id="main" className="map-page">
-    <div className="map-intro">
-      <div>
-        <p className="eyebrow">Ο χάρτης</p>
-        <h1 ref={heading} tabIndex={-1}>Πού θα εξερευνήσεις σήμερα;</h1>
-      </div>
-      <ExplorerBadge profile={profile} />
-    </div>
+  const highlight = (id: TopicId) => ({ onPointerEnter: () => setActive(id), onPointerLeave: () => setActive(null) })
+  return <main id="main" className="archipelago-page">
+    <h1 ref={heading} tabIndex={-1} className="sr-only">Πού θα εξερευνήσεις σήμερα;</h1>
     {resume && <Link className="button primary resume-link" to={paths.mission(resume.topicId, resume.id)}>Συνέχισε την αποστολή: {resume.title} <Icon kind="arrow" /></Link>}
-    <ol className="islets" aria-label="Θέματα">
-      {topics.map(topic => <li key={topic.id} className={`islet-item topic-${topic.id}`}>
-        <Link className="islet" to={paths.topic(topic.id)} aria-label={`${topic.name}, ${topicProgress(topic, progress)}`}>
-          <Islet />
-          <span className="islet-name">{topic.name}</span>
-          <span className={`islet-status${topic.missions.length ? '' : ' is-soon'}`}>{topicProgress(topic, progress)}</span>
-        </Link>
-      </li>)}
-    </ol>
+    <div className="archipelago-layout">
+      <ul className="topic-list" aria-label="Θέματα">
+        {topics.map(topic => <li key={topic.id}>
+          <Link className={`topic-card${active === topic.id ? ' is-active' : ''}`} to={paths.topic(topic.id)} aria-label={`${topic.name}, ${topicProgress(topic, progress)}`}
+            {...highlight(topic.id)} onFocus={() => setActive(topic.id)} onBlur={() => setActive(null)}>
+            <img className="topic-thumb" src={`/assets/map/thumb-${topic.id}.webp`} alt="" width="104" height="88" decoding="async" />
+            <span className="topic-text">
+              <span className="topic-name">{topic.name}</span>
+              <span className="topic-progress">{topicProgress(topic, progress)}</span>
+            </span>
+            <span className="topic-chevron"><Icon kind="arrow" /></span>
+          </Link>
+        </li>)}
+      </ul>
+      <div className="archipelago-sea">
+        <picture className="archipelago-scene">
+          <source media="(max-width: 899px)" srcSet="/assets/map/scene-900.webp" />
+          <img src="/assets/map/scene-1625.webp" srcSet="/assets/map/scene-900.webp 900w, /assets/map/scene-1625.webp 1625w" sizes="(min-width: 1280px) 820px, 64vw" alt="" decoding="async" />
+        </picture>
+        {/* Duplicates the list for pointer users only, so it stays out of the tab order and the accessibility tree. */}
+        <div className="archipelago-islands" aria-hidden="true">
+          {topics.map(topic => <Link key={topic.id} tabIndex={-1} to={paths.topic(topic.id)} {...highlight(topic.id)}
+            className={`island-link destination-${topic.id}${active === topic.id ? ' is-active' : ''}`}>
+            <span className="island-caption">{topic.name}</span>
+          </Link>)}
+        </div>
+        <p className="map-guide" aria-hidden="true">Διάλεξε<br />το νησί σου!</p>
+      </div>
+    </div>
   </main>
 }

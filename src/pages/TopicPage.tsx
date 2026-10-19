@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router'
 import { BackLink } from '../components/BackLink.tsx'
-import { ExplorerBadge } from '../components/ExplorerBadge.tsx'
 import { useFocusOnNavigation } from '../hooks/useFocusOnNavigation.ts'
 import { useLessonProgress } from '../lessons/useLessonProgress.ts'
 import { Islet } from '../map/Islet.tsx'
@@ -39,7 +38,6 @@ function TopicMap({ topic }: { topic: Topic }) {
         <p className="eyebrow">Θέμα</p>
         <h1 ref={heading} tabIndex={-1}>{topic.name}</h1>
       </div>
-      <ExplorerBadge profile={profile} />
     </div>
     {topic.missions.length === 0 || !selected
       ? <section className="topic-soon">
